@@ -97,8 +97,8 @@
 			</div>
 			<div class="layui-form-item" onclick="closePage()">
 				<label for="L_repass" class="layui-form-label"> </label>
-				<button class="layui-btn" type="submit" lay-filter="add"
-					lay-submit="">增加</button>
+				<button class="layui-btn" type="submit" lay-filter="add" id="btn_submit"
+					lay-submit="" onclick="btn_click()">增加</button>
 			</div>
 		</form>
 	</div>
@@ -123,9 +123,16 @@
 				}
 			});
 
+			$("#btn_submit").click(function(){
+				// 获得frame索引
+				var index = parent.layer.getFrameIndex(window.name);
+				//关闭当前frame
+				parent.layer.close(index);
+			});
+			
 			//监听提交
 			/* form.on('submit(add)', function(data) {
-				console.log(data);
+				/* console.log(data);
 				//发异步，把数据提交给php
 				layer.alert("增加成功", {
 					icon : 6
@@ -136,7 +143,7 @@
 					parent.layer.close(index);
 				});
 				return false;
-			}); */
+			});  */
 
 		});
 	</script>

@@ -16,6 +16,9 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/xadmin.js"></script>
+    <script>
+    	
+    </script>
 
 </head>
 <body class="login-bg">
@@ -25,8 +28,9 @@
         <div id="darkbannerwrap"></div>
                
         <form method="post" class="layui-form" action="${pageContext.request.contextPath }/adminLogin" >
-            <input name="admin_name" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
-            <hr class="hr15">
+            <input name="admin_name" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" 
+            	onfocus="hideError()">
+            <hr class="hr15" >
             <input name="admin_password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
             <hr class="hr15">
             <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
@@ -34,7 +38,11 @@
         </form>
         <div id="error-div"><span style="color:red;"><%=request.getAttribute("loginError")==null?"":request.getAttribute("loginError") %></span></div>
     </div>
-    
+    <script>
+    	function hideError(){
+    		$("#error-div").css("display","none");
+    	}
+    </script>
     <!-- 底部结束 -->
     
 </body>
