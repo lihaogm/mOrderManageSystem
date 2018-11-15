@@ -48,4 +48,10 @@ public class Admin {
 		this.create_time = create_time;
 	}
 
+	@Override
+	public String toString() {
+		
+		return "admin[aid: "+aid+"\r\n"+"adminName: "+adminName+"\r\n"+"adminPasseword: "+adminPassword+"\r\n"+"adminPrivilege: "+adminPrivilege+"\r\n"+
+				"adminCreateTime: "+create_time+"]";
+	}
 }

@@ -55,7 +55,7 @@
 			onclick="x_admin_show('添加用户','./admin_add.jsp')">
 			<i class="layui-icon"></i>添加
 		</button>
-		<span class="x-right" style="line-height: 40px">共有数据：？条</span> </xblock>
+		<!-- <span class="x-right" style="line-height: 40px">共有数据：？条</span> </xblock> -->
 		<table class="layui-table">
 			<thead>
 				<tr>
@@ -98,7 +98,7 @@
 							<!-- <a onclick="member_stop(this,'10001')" href="javascript:;" title="启用"> 
 								<i class="layui-icon">&#xe601;</i>
 							</a>  -->
-							<a title="编辑" onclick="x_admin_show('编辑','admin-edit.html')" href="javascript:;"> 
+							<a title="编辑" onclick="x_admin_show('编辑','${pageContext.request.contextPath }/adminPreparedUpdate?aid=${admin.aid }')" href="javascript:;"> 
 								<i class="layui-icon">&#xe642;</i>
 							</a> 
 							<a title="删除" onclick="deleteAdmin('${admin.aid}')" href="javascript:;"> 

@@ -69,4 +69,24 @@
     <servlet-name>AdminMutilDeleteServlet</servlet-name>
     <url-pattern>/adminMultiDelete</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminPreparedUpdateServlet</display-name>
+    <servlet-name>AdminPreparedUpdateServlet</servlet-name>
+    <servlet-class>com.lihaogn.web.AdminPreparedUpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminPreparedUpdateServlet</servlet-name>
+    <url-pattern>/adminPreparedUpdate</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminUpdateServlet</display-name>
+    <servlet-name>AdminUpdateServlet</servlet-name>
+    <servlet-class>com.lihaogn.web.AdminUpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminUpdateServlet</servlet-name>
+    <url-pattern>/adminUpdate</url-pattern>
+  </servlet-mapping>
 </web-app>

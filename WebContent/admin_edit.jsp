@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,26 +18,29 @@
 <script type="text/javascript" src="./lib/layui/layui.js"
 	charset="utf-8"></script>
 <script type="text/javascript" src="./js/xadmin.js"></script>
-<script>
-	
-</script>
 <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
 <!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+<script>
+	$(function(){
+		$(":radio[value='${admin.adminPrivilege}']").attr("checked",true);
+	});
+</script>
 
 <body>
 	<div class="x-body">
-		<form class="layui-form" action="${pageContext.request.contextPath }/adminAdd" method="post">
+		<form class="layui-form" action="${pageContext.request.contextPath }/adminUpdate" method="post">
+			<input type="hidden" name="aid" value="${admin.aid }">
 			<div class="layui-form-item">
 				<label for="username" class="layui-form-label"> <span
 					class="x-red">*</span>登录名
 				</label>
 				<div class="layui-input-inline">
 					<input type="text" id="username" name="adminName" required=""
-						lay-verify="required" autocomplete="off" value=""
+						lay-verify="required" autocomplete="off" value="${admin.adminName }"
 						class="layui-input">
 				</div>
 				<div class="layui-form-mid layui-word-aux">
@@ -76,20 +80,22 @@
 				</div>
 			</div>
 			<div class="layui-form-item">
-				<label for="L_pass" class="layui-form-label"> <span class="x-red">*</span>密码</label>
+				<label for="L_pass" class="layui-form-label"> <span
+					class="x-red">*</span>密码
+				</label>
 				<div class="layui-input-inline">
 					<input type="password" id="L_pass" name="adminPassword" required=""
-						lay-verify="pass" autocomplete="off" class="layui-input">
+						lay-verify="pass" autocomplete="off" class="layui-input" value="${admin.adminPassword }">
 				</div>
 				<div class="layui-form-mid layui-word-aux">6到16个字符</div>
 			</div>
 			<div class="layui-form-item">
-				<label for="L_repass" class="layui-form-label"> 
-					<span class="x-red">*</span>确认密码
+				<label for="L_repass" class="layui-form-label"> <span
+					class="x-red">*</span>确认密码
 				</label>
 				<div class="layui-input-inline">
 					<input type="password" id="L_repass" name="repass" required=""
-						lay-verify="repass" autocomplete="off" class="layui-input">
+						lay-verify="repass" autocomplete="off" class="layui-input" value="${admin.adminPassword }">
 				</div>
 			</div>
 			<div class="layui-form-item" >
@@ -99,7 +105,6 @@
 			</div>
 		</form>
 	</div>
-	
 	<script>
 		layui.use([ 'form', 'layer' ], function() {
 			$ = layui.jquery;
@@ -119,28 +124,26 @@
 					}
 				}
 			});
-
+			
 			$("#btn_submit").click(function(){
 				// 获得frame索引
 				var index = parent.layer.getFrameIndex(window.name);
 				//关闭当前frame
 				parent.layer.close(index);
 			});
-			
+
 			//监听提交
-			/* form.on('submit(add)', function(data) {
-				/* console.log(data);
-				//发异步，把数据提交给php
-				layer.alert("增加成功", {
-					icon : 6
-				}, function() {
-					// 获得frame索引
-					var index = parent.layer.getFrameIndex(window.name);
-					//关闭当前frame
-					parent.layer.close(index);
-				});
-				return false;
-			});  */
+			//        form.on('submit(add)', function(data){
+			//          console.log(data);
+			//          //发异步，把数据提交给php
+			//          layer.alert("增加成功", {icon: 6},function () {
+			//              // 获得frame索引
+			//              var index = parent.layer.getFrameIndex(window.name);
+			//              //关闭当前frame
+			//              parent.layer.close(index);
+			//          });
+			//          return false;
+			//        });
 
 		});
 	</script>
