@@ -22,6 +22,7 @@ public class AdminLoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		HttpSession session = request.getSession();
 		// 获取管理员名和密码
 		String adminName = request.getParameter("admin_name");
@@ -40,10 +41,10 @@ public class AdminLoginServlet extends HttpServlet {
 			// 将admin对象存储到session中
 			session.setAttribute("admin", admin);
 			// 重定向到首页
-			response.sendRedirect(request.getContextPath()+"/admin_index.jsp");
+			response.sendRedirect(request.getContextPath()+"/index.jsp");
 		}else {
 			request.setAttribute("loginError", "用户名或密码错误！");
-			request.getRequestDispatcher("/admin_login.jsp").forward(request, response);
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
 		
 	}

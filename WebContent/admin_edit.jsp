@@ -101,7 +101,7 @@
 			<div class="layui-form-item" >
 				<label for="L_repass" class="layui-form-label"> </label>
 				<button class="layui-btn" type="submit" lay-filter="add" id="btn_submit"
-					lay-submit="" >增加</button>
+					lay-submit="" >修改</button>
 			</div>
 		</form>
 	</div>

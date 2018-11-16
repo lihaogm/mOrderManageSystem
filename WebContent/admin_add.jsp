@@ -43,30 +43,7 @@
 					<span class="x-red">*</span>将会成为您唯一的登入名
 				</div>
 			</div>
-			<!--<div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
-                  <span class="x-red">*</span>手机
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" value="18925139194" id="phone" name="phone" required="" lay-verify="phone"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>将会成为您唯一的登入名
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red">*</span>邮箱
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" value="113664000@qq.com" id="L_email" name="email" required="" lay-verify="email"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>-->
+			
 			<div class="layui-form-item">
 				<label class="layui-form-label"><span class="x-red">*</span>角色</label>
 				<div class="layui-input-block">
@@ -127,24 +104,11 @@
 				parent.layer.close(index);
 			});
 			
-			//监听提交
-			/* form.on('submit(add)', function(data) {
-				/* console.log(data);
-				//发异步，把数据提交给php
-				layer.alert("增加成功", {
-					icon : 6
-				}, function() {
-					// 获得frame索引
-					var index = parent.layer.getFrameIndex(window.name);
-					//关闭当前frame
-					parent.layer.close(index);
-				});
-				return false;
-			});  */
+			
 
 		});
 	</script>
-	<!-- <script>
+	<script>
 		var _hmt = _hmt || [];
 		(function() {
 			var hm = document.createElement("script");
@@ -152,6 +116,6 @@
 			var s = document.getElementsByTagName("script")[0];
 			s.parentNode.insertBefore(hm, s);
 		})();
-	</script> -->
+	</script>
 </body>
 </html>
