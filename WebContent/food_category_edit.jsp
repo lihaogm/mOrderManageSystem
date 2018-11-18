@@ -17,7 +17,13 @@
 	<script type="text/javascript" src="./lib/layui/layui.js"
 		charset="utf-8"></script>
 	<script type="text/javascript" src="./js/xadmin.js"></script>
-
+	<!-- <script>
+		function refresh(){
+			setTimeout(function(){
+				location.replace(location.href);
+			},500);
+		}
+	</script> -->
 </head>
 
 <body>

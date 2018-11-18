@@ -149,4 +149,34 @@
     <servlet-name>FoodCategoryUpdateServlet</servlet-name>
     <url-pattern>/foodCategoryUpdate</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FoodListServlet</display-name>
+    <servlet-name>FoodListServlet</servlet-name>
+    <servlet-class>com.lihaogn.web.FoodListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FoodListServlet</servlet-name>
+    <url-pattern>/foodList</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FoodAddServlet</display-name>
+    <servlet-name>FoodAddServlet</servlet-name>
+    <servlet-class>com.lihaogn.web.FoodAddServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FoodAddServlet</servlet-name>
+    <url-pattern>/foodAdd</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FoodPreparedAddServlet</display-name>
+    <servlet-name>FoodPreparedAddServlet</servlet-name>
+    <servlet-class>com.lihaogn.web.FoodPreparedAddServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FoodPreparedAddServlet</servlet-name>
+    <url-pattern>/foodPreparedAdd</url-pattern>
+  </servlet-mapping>
 </web-app>

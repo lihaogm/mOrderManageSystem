@@ -14,6 +14,13 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/xadmin.js"></script>
+    <script>
+		function refresh(){
+			setTimeout(function(){
+				location.replace(location.href);
+			},500);
+		}
+	</script>
   </head>
   
   <body>
@@ -22,6 +29,8 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i>
       </a>
     </div>
+    <!-- 刷新事件，弹出层结束刷新此页面 -->
+  	<i id="irefresh" onclick="refresh()"></i>
     <div class="x-body">
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="deleteAllAdmin()"><i class="layui-icon"></i>批量删除</button>

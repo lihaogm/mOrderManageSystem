@@ -22,6 +22,8 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i>
       </a>
     </div>
+    <!-- 刷新事件，弹出层结束刷新此页面 -->
+  	<i id="irefresh" onclick="refresh()"></i>
     <div class="x-body">
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="deleteAllFoodCategory()"><i class="layui-icon"></i>批量删除</button>
@@ -96,6 +98,13 @@
 			}
 		}
     </script>
+    <script>
+		function refresh(){
+			setTimeout(function(){
+				location.replace(location.href);
+			},500);
+		}
+	</script>
     <script>var _hmt = _hmt || []; (function() {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";

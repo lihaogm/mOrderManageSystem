@@ -8,13 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lihaogn.domain.Admin;
-import com.lihaogn.service.AdminService;
+import com.lihaogn.domain.FoodCategory;
+import com.lihaogn.domain.FoodType;
+import com.lihaogn.service.FoodService;
 
 /**
- * Servlet implementation class AdminListServlet
+ * Servlet implementation class FoodPreparedAddServlet
  */
-public class AdminListServlet extends HttpServlet {
+public class FoodPreparedAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -22,12 +23,14 @@ public class AdminListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		AdminService adminService = new AdminService();
-		List<Admin> listAdmin=adminService.getAllAdmin();
+		FoodService foodService = new FoodService();
+		List<FoodCategory> listFoodCategory = foodService.getAllFoodCategory();
+		List<FoodType> listFoodType = foodService.getAllFoodType();
 		
-		request.setAttribute("allAdmins", listAdmin);
-		request.getRequestDispatcher("/admin_list.jsp").forward(request, response);
+		request.setAttribute("foodCategories", listFoodCategory);
+		request.setAttribute("foodTypes", listFoodType);
 		
+		request.getRequestDispatcher("/food_add.jsp").forward(request, response);
 	}
 
 	/**
