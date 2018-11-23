@@ -32,5 +32,10 @@ public class FoodType {
 		this.ftc_modified_time = ftc_modified_time;
 	}
 	
+	@Override
+	public String toString() {
+		return "food_type[pk_ftc_id: "+pk_ftc_id+"\r\n"+"ftc_name: "+ftc_name+"\r\n"+"ftc_create_time: "+
+				ftc_create_time+"\r\n"+"fcModifiedDate: "+ftc_modified_time+"]";
+	}
 	
 }

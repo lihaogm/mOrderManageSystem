@@ -106,7 +106,7 @@ public class FoodDao {
 	}
 
 	/**
-	 * 获取荤素类别
+	 * 获取所有荤素类别
 	 * @return
 	 * @throws SQLException 
 	 */
@@ -148,6 +148,8 @@ ftc_id: 3]
 	/**
 	 * 添加菜品
 	 * @param food
+	 * @param foodTypeId 
+	 * @param foodCategoryId 
 	 * @throws SQLException 
 	 */
 	public void addFood(Food food) throws SQLException {
@@ -159,6 +161,30 @@ ftc_id: 3]
 				food.getPk_fid(),food.getFname(),food.getFmarket_price(),food.getFshop_price(),
 				food.getFimage(),food.getFcreat_date(),food.getFmodified_date(),food.getFis_hot(),
 				food.getFdesc(),food.getFis_onsale(),food.getFcwc_id(),food.getFtc_id());
+	}
+
+	/**
+	 * 获取菜品总数
+	 * @return
+	 * @throws SQLException 
+	 */
+	public long getFoodAllCount() throws SQLException {
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql="select count(*) from food";
+		
+		return (long) runner.query(sql, new ScalarHandler());
+	}
+
+	/**
+	 * 根据id获取荤素类别名称
+	 * @param ftc_id
+	 * @return
+	 * @throws SQLException 
+	 */
+	public String getFoodTypeNameById(int ftc_id) throws SQLException {
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql="select ftc_name from food_type_category where pk_ftc_id=?";
+		return (String) runner.query(sql, new ScalarHandler(),ftc_id);
 	}
 
 }

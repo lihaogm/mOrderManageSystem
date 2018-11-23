@@ -14,6 +14,8 @@ public class Food {
 	private short fis_onsale;
 	private String fcwc_id;
 	private int ftc_id;
+//	private FoodCategory foodCategory;
+//	private FoodType foodType;
 	
 	public String getPk_fid() {
 		return pk_fid;
@@ -87,6 +89,18 @@ public class Food {
 	public void setFtc_id(int ftc_id) {
 		this.ftc_id = ftc_id;
 	}
+//	public FoodCategory getFoodCategory() {
+//		return foodCategory;
+//	}
+//	public void setFoodCategory(FoodCategory foodCategory) {
+//		this.foodCategory = foodCategory;
+//	}
+//	public FoodType getFoodType() {
+//		return foodType;
+//	}
+//	public void setFoodType(FoodType foodType) {
+//		this.foodType = foodType;
+//	}
 	
 	/*
 	 * private String pk_fid;
@@ -113,6 +127,18 @@ public class Food {
 				"fdesc: "+fdesc+"\r\n"+"fis_onsale: "+fis_onsale+"\r\n"+
 				"fcwc_id: "+fcwc_id+"\r\n"+"ftc_id: "+ftc_id+"]";
 	}
+	
+//	@Override
+//	public String toString() {
+//		
+//		return "food[pk_fid: "+pk_fid+"\r\n"+"fname: "+fname+"\r\n"+
+//				"fmarket_price: "+fmarket_price+"\r\n"+"fshop_price: "+fshop_price+"\r\n"+
+//				"fimage:"+fimage+"\r\n"+"fcreat_date: "+fcreat_date+"\r\n"+
+//				"fmodified_date: "+fmodified_date+"\r\n"+"fis_hot: "+fis_hot+"\r\n"+
+//				"fdesc: "+fdesc+"\r\n"+"fis_onsale: "+fis_onsale+"\r\n"+
+//				"fcwc: "+foodCategory.toString()+"\r\n"+"ftc: "+foodType.toString()+"]";
+//	}
+//	
 	
 
 }

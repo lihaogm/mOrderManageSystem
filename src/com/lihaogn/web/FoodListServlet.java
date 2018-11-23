@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lihaogn.domain.Food;
 import com.lihaogn.domain.FoodCategory;
 import com.lihaogn.domain.FoodType;
+import com.lihaogn.domain.PageBeanFood;
 import com.lihaogn.service.FoodService;
 
 
@@ -25,45 +25,26 @@ public class FoodListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		String mfoodCategory=null;
-//		String mfoodType=null;
-		
 		FoodService service = new FoodService();
 		
-		List<Food> listFood=service.getAllFood();
+		// 获得所有菜品
+//		List<Food> listFood=service.getAllFood();
+//		request.setAttribute("foods", listFood);
 		
+		// 获取页面所需菜品的所有信息
+		List<PageBeanFood> listPageBean=service.getAllFoodInfo();
+
+		request.setAttribute("foods", listPageBean);
+		// 获得所有菜品种类
 		List<FoodCategory> listFoodCategory=service.getAllFoodCategory();
-		
-		List<FoodType> listFoodType=service.getAllFoodType();
-		
-		String[] mfoodTypes=new String[listFoodType.size()];
-		String[] mfoodCategories=new String[listFoodCategory.size()];
-		
-		for (Food food : listFood) {
-			for (FoodType foodType : listFoodType) {
-				for (String mfoodType : mfoodTypes) {
-					if (food.getFtc_id()==foodType.getPk_ftc_id()) {
-						mfoodType=foodType.getFtc_name();
-					}
-				}
-				
-			}
-			for (FoodCategory foodCategory : listFoodCategory) {
-				for (String mfoodCategory : mfoodCategories) {
-					if (food.getFcwc_id().equals(foodCategory.getPk_fcwc_id())) {
-						mfoodCategory=foodCategory.getFcwc_name();
-					}
-				}
-				
-			}
-		}
-		
-		
-		request.setAttribute("mfoodCategory", mfoodCategories);
-		request.setAttribute("mfoodType", mfoodTypes);
-		request.setAttribute("foodTypes", listFoodType);
 		request.setAttribute("foodCategories", listFoodCategory);
-		request.setAttribute("foods", listFood);
+		// 获得荤素种类
+		List<FoodType> listFoodType=service.getAllFoodType();
+		request.setAttribute("foodTypes", listFoodType);
+		// 获取菜品总数
+		long foodAllCount=service.getFoodAllCount();
+		request.setAttribute("foodCounts", foodAllCount);
+		
 		request.getRequestDispatcher("/food_list.jsp").forward(request, response);
 	}
 

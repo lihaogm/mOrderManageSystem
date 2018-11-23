@@ -46,10 +46,10 @@ public class FoodAddServlet extends HttpServlet {
 		food.setFmodified_date(createDate);
 		food.setFcreat_date(createDate);
 		
-		System.out.println(food);
+//		System.out.println(food);
 		
-//		FoodService service = new FoodService();
-//		service.addFood(food);
+		FoodService service = new FoodService();
+		service.addFood(food);
 		
 		response.sendRedirect(request.getContextPath()+"/foodList");
 		

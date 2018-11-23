@@ -30,7 +30,7 @@
       <i class="layui-icon" style="line-height:30px" >ဂ</i>
     </a>
   </div>
-  <!-- 刷新事件，弹出层结束刷新此页面 -->
+  <!-- 刷新事件，弹出层关闭刷新此页面 -->
   <i id="irefresh" onclick="refresh()"></i>
   <div class="x-body">
     <div class="layui-row">
@@ -69,7 +69,7 @@
     <xblock>
       <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
       <button class="layui-btn" onclick="x_admin_show('添加菜品','${pageContext.request.contextPath}/foodPreparedAdd')"><i class="layui-icon"></i>添加</button>
-      <span class="x-right" style="line-height:40px">共有数据：???条</span>
+      <span class="x-right" style="line-height:40px">共有数据：${foodCounts } 条</span>
     </xblock>
     <table class="layui-table" id="dataTable">
       <thead>
@@ -97,19 +97,19 @@
 	            <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
 	          </td>
 	          <td>${vs.count }</td>
-	          <td>${food.fname }</td>
-	          <td>￥${food.fmarket_price }</td>
-	          <td>￥${food.fshop_price }</td>
+	          <td>${food.food.fname }</td>
+	          <td>￥${food.food.fmarket_price }</td>
+	          <td>￥${food.food.fshop_price }</td>
 	          <td>
-	          	<img src="${pageContext.request.contextPath }/${food.fimage}" width="45" height="40"></td>
-	          <td>${food.fcreat_date }</td>
-	          <td>${food.fmodified_date }</td>
-	          <td>${food.fis_hot==1?"热门":"" }</td>
+	          	<img src="${pageContext.request.contextPath }/${food.food.fimage}" width="45" height="40"></td>
+	          <td>${food.food.fcreat_date }</td>
+	          <td>${food.food.fmodified_date }</td>
+	          <td>${food.food.fis_hot==1?"热门":"" }</td>
 	          <td>
-	          	<span onclick="showDesc('${food.fdesc}')" title="${food.fdesc}">...</span>
+	          	<span onclick="showDesc('${food.food.fdesc}')" title="${food.food.fdesc}">...</span>
 	          </td>
-	          <td>${mfoodCategories[vs.count-1] },${mfoodTypes[vs.count-1] }</td>
-	          <td>${food.fis_onsale==1?"在售":"下架" }</td>
+	          <td>${food.foodCategoryName },${food.foodTypeName }</td>
+	          <td>${food.food.fis_onsale==1?"在售":"下架" }</td>
 	          <td class="td-manage">
 	            <a title="编辑"  onclick="x_admin_show('编辑','?????')" href="javascript:;">
 	              <i class="layui-icon">&#xe642;</i>
