@@ -7,7 +7,7 @@
  - JDK1.8
  - eclipse
  - Tomcat 7.0
- - 第三方jar包（根目录下third-tool文件夹内）
+ - 第三方jar包
 
 #### 2 开发内容与进度
  1. 用户（管理员）信息管理
