@@ -61,7 +61,7 @@
 			form.verify({
 				nikename : function(value) {
 					if (value.length < 2) {
-						return '昵称至少得2个字符啊';
+						return '类名至少得2个字符啊';
 					}
 				}
 			});

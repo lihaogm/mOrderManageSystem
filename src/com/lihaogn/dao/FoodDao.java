@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
@@ -185,6 +186,114 @@ ftc_id: 3]
 		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
 		String sql="select ftc_name from food_type_category where pk_ftc_id=?";
 		return (String) runner.query(sql, new ScalarHandler(),ftc_id);
+	}
+
+	/**
+	 * 根据id删除菜品
+	 * @param fcId
+	 * @throws SQLException 
+	 */
+	public void deleteFoodById(String fcId) throws SQLException {
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql="delete from food where pk_fid=?";
+		runner.update(sql, fcId);
+	}
+
+	/**
+	 * 根据id获取菜品
+	 * @param aid
+	 * @return
+	 * @throws SQLException 
+	 */
+	public Food getFoodById(String fcid) throws SQLException {
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql="select * from food where pk_fid=?";
+		
+		return runner.query(sql, new BeanHandler<Food>(Food.class), fcid);
+	}
+
+	/**
+	 * 编辑菜品信息
+	 * @param food
+	 * @throws SQLException 
+	 */
+	public void editFood(Food food) throws SQLException {
+
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql="update food set fname=?,fmarket_price=?,fshop_price=?,fimage=?,fmodified_date=?,"
+				+ "fdesc=?,fis_onsale=?,fcwc_id=?,ftc_id=? where pk_fid=?";
+		runner.update(sql, 
+				food.getFname(),food.getFmarket_price(),food.getFshop_price(),food.getFimage(),food.getFmodified_date(),
+				food.getFdesc(),food.getFis_onsale(),food.getFcwc_id(),food.getFtc_id(),food.getPk_fid());
+	}
+
+	/**
+	 * 根据菜名获取菜品信息
+	 * @param foodName
+	 * @return
+	 * @throws SQLException 
+	 */
+	public Food getFoodByName(String foodName) throws SQLException {
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql="select * from food where fname=?";
+		
+		return runner.query(sql, new BeanHandler<Food>(Food.class), foodName);
+	}
+
+	/**
+	 * 根据种类获取菜品信息
+	 * @param foodCategoryId
+	 * @param foodTypeId
+	 * @param i 
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<Food> getFoodByCategoryType(String foodCategoryId, int foodTypeId, int i) throws SQLException {
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql=null;
+		List<Food> foods=null;
+		if (i==0) {
+			sql="select * from food where fcwc_id=? and ftc_id=?";
+			foods = runner.query(sql, new BeanListHandler<Food>(Food.class), 
+					foodCategoryId,foodTypeId);
+		}else if (i==1) {
+			sql="select * from food where fcwc_id=?";
+			foods = runner.query(sql, new BeanListHandler<Food>(Food.class), 
+					foodCategoryId);
+		}else if (i==2) {
+			sql="select * from food where ftc_id=?";
+			foods = runner.query(sql, new BeanListHandler<Food>(Food.class), 
+					foodTypeId);
+		}
+		
+		return foods;
+	}
+
+	/**
+	 * 搜索的菜品记录条数
+	 * @param foodCategoryId
+	 * @param foodTypeId
+	 * @param i
+	 * @return
+	 * @throws SQLException 
+	 */
+	public long getItemCount(String foodCategoryId, int foodTypeId, int i) throws SQLException {
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql=null;
+		long itemCount=0;
+		
+		if (i==0) {
+			sql="select count(*) from food where fcwc_id=? and ftc_id=?";
+			itemCount=(long) runner.query(sql, new ScalarHandler(), foodCategoryId,foodTypeId);
+		}else if (i==1) {
+			sql="select count(*) from food where fcwc_id=?";
+			itemCount=(long) runner.query(sql, new ScalarHandler(), foodCategoryId);
+		}else if (i==2) {
+			sql="select count(*) from food where ftc_id=?";
+			itemCount=(long) runner.query(sql, new ScalarHandler(), foodTypeId);
+		}
+		
+		return itemCount;
 	}
 
 }

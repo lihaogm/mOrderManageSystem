@@ -188,7 +188,6 @@ public class FoodService {
 		FoodDao dao = new FoodDao();
 
 		List<PageBeanFood> listPageBeanFood = new ArrayList<PageBeanFood>();
-		
 
 		// 获取到所有的菜品
 		List<Food> listAllFood = null;
@@ -207,19 +206,168 @@ public class FoodService {
 				int ftc_id = food.getFtc_id();
 				pageBeanFood.setFoodTypeName(dao.getFoodTypeNameById(ftc_id));
 
-				System.out.println(pageBeanFood.toString());
+//				System.out.println(pageBeanFood.toString());
 				listPageBeanFood.add(pageBeanFood);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("----------------------");
-		System.out.println(listPageBeanFood.size());
-		for (PageBeanFood bean : listPageBeanFood) {
-			System.out.println(bean.toString());
+//		System.out.println("----------------------");
+//		System.out.println(listPageBeanFood.size());
+//		for (PageBeanFood bean : listPageBeanFood) {
+//			System.out.println(bean.toString());
+//		}
+		return listPageBeanFood;
+	}
+
+	/**
+	 * 根据id删除菜品
+	 * 
+	 * @param fcId
+	 */
+	public void deleteFoodById(String fcId) {
+		FoodDao foodDao = new FoodDao();
+		try {
+			foodDao.deleteFoodById(fcId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * 根据多个id删除对应的菜品
+	 * 
+	 * @param fcIds
+	 */
+	public void deleteMutilFoodById(String fcIds) {
+		FoodDao foodDao = new FoodDao();
+		String[] split = fcIds.split("\\;");
+		for (String fcid : split) {
+			try {
+				foodDao.deleteFoodById(fcid);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * 根据id获取菜品
+	 * 
+	 * @param aid
+	 * @return
+	 */
+	public PageBeanFood getFoodById(String fid) {
+		FoodDao foodDao = new FoodDao();
+		PageBeanFood beanFood = new PageBeanFood();
+		try {
+			Food food = foodDao.getFoodById(fid);
+			beanFood.setFood(food);
+			beanFood.setFoodCategoryName(foodDao.getFoodCategoryByid(food.getFcwc_id()));
+			beanFood.setFoodTypeName(foodDao.getFoodTypeNameById(food.getFtc_id()));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return beanFood;
+	}
+
+	/**
+	 * 编辑菜品信息
+	 * 
+	 * @param food
+	 */
+	public void editFood(Food food) {
+
+		FoodDao foodDao = new FoodDao();
+		try {
+			foodDao.editFood(food);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 根据菜名获取菜品信息
+	 * 
+	 * @param foodName
+	 * @return
+	 */
+	public List<PageBeanFood> getFoodByName(String foodName) {
+
+		FoodDao dao = new FoodDao();
+		Food food = null;
+		PageBeanFood pageBeanFood=new PageBeanFood();
+		List<PageBeanFood> listPageBeanFood=new ArrayList<PageBeanFood>();
+		try {
+			food = dao.getFoodByName(foodName);
+			pageBeanFood.setFood(food);
+			pageBeanFood.setFoodCategoryName(dao.getFoodCategoryByid(food.getFcwc_id()));
+			pageBeanFood.setFoodTypeName(dao.getFoodTypeNameById(food.getFtc_id()));
+			listPageBeanFood.add(pageBeanFood);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return listPageBeanFood;
+	}
+
+	/**
+	 * 根据种类获取菜品信息
+	 * @param foodCategoryId
+	 * @param foodTypeId
+	 * @param i 
+	 * @return
+	 */
+	public List<PageBeanFood> getFoodByCategoryType(String foodCategoryId, int foodTypeId, int i) {
+		
+		FoodDao dao = new FoodDao();
+		List<PageBeanFood> listPageBeanFood=new ArrayList<PageBeanFood>();
+		List<Food> listfood=null;
+		
+		try {
+			
+			listfood=dao.getFoodByCategoryType(foodCategoryId,foodTypeId,i);
+			
+			for (Food food : listfood) {
+				
+				PageBeanFood pageBeanFood = new PageBeanFood();
+				
+				pageBeanFood.setFood(food);
+				pageBeanFood.setFoodCategoryName(dao.getFoodCategoryByid(food.getFcwc_id()));
+				pageBeanFood.setFoodTypeName(dao.getFoodTypeNameById(food.getFtc_id()));
+				
+				listPageBeanFood.add(pageBeanFood);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listPageBeanFood;
+	}
+
+	/**
+	 * 搜索的菜品记录条数
+	 * @param foodCategoryId
+	 * @param foodTypeId
+	 * @param i
+	 * @return
+	 */
+	public long getItemCount(String foodCategoryId, int foodTypeId, int i) {
+		FoodDao dao = new FoodDao();
+		long itemCount=0;
+		try {
+			itemCount = dao.getItemCount(foodCategoryId,foodTypeId,i);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return itemCount;
 	}
 
 }

@@ -66,23 +66,6 @@ public class AdminDao {
 	}
 
 	/**
-	 * 根据aids删除多个admin
-	 * 
-	 * @param aids
-	 * @throws SQLException
-	 */
-	public void deleteMutilAdminByAid(String aids) throws SQLException {
-
-		String[] split = aids.split("\\)");
-		for (String aid : split) {
-			// System.out.println(aid);
-			QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
-			String sql = "delete from admin where aid=?";
-			runner.update(sql, aid);
-		}
-	}
-
-	/**
 	 * 根据aid查询admin
 	 * 
 	 * @param aid

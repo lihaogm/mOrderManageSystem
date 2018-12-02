@@ -79,13 +79,15 @@ public class AdminService {
 	public void deleteMutilAdminByAid(String aids) {
 
 		AdminDao dao = new AdminDao();
-		try {
-			dao.deleteMutilAdminByAid(aids);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String[] split = aids.split("\\)");
+		for (String aid : split) {
+			try {
+				dao.deleteAdminByAid(aid);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-
 	}
 
 	/**

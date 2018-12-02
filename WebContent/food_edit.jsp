@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>添加菜品</title>
+	<title>编辑菜品</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport"
@@ -18,18 +18,26 @@
 		charset="utf-8"></script>
 	<script type="text/javascript" src="./js/xadmin.js"></script>
 
+<script>
+	$(function(){
+		$("option.mfc[value='${food.food.fcwc_id}']").attr("selected",true);
+		$("option.mft[value='${food.food.ftc_id}']").attr("selected",true);
+		$(":radio[value='${food.food.fis_onsale}']").attr("checked",true);
+	});
+</script>
 </head>
 
 <body>
 	<div class="x-body">
-		<form class="layui-form" action="${pageContext.request.contextPath }/foodAdd" method="post" enctype="multipart/form-data">
+		<form class="layui-form" action="${pageContext.request.contextPath }/foodEdit" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="pk_fid" value="${food.food.pk_fid }">
 			<!-- 填写菜名 -->
 			<div class="layui-form-item">
 				<label for="food_name" class="layui-form-label">菜名
 				</label>
 				<div class="layui-input-inline">
 					<input type="text" id="food_name" name="fname" required=""
-						lay-verify="required" autocomplete="off" value=""
+						lay-verify="required" autocomplete="off" value="${food.food.fname }"
 						class="layui-input" autofocus="autofocus">
 				</div>
 				<div class="layui-form-mid layui-word-aux">
@@ -43,7 +51,7 @@
 					</label>
 					<div class="layui-input-inline">
 						<input type="text" id="market_price" name="fmarket_price" required=""
-							lay-verify="required" autocomplete="off" value=""
+							lay-verify="required" autocomplete="off" value="${food.food.fmarket_price }"
 							class="layui-input">
 					</div>
 					<div class="layui-form-mid layui-word-aux">
@@ -54,10 +62,11 @@
 			<!-- 店内价/优惠价/现价 -->
 			<div class="layui-input-inline">
 				<div class="layui-form-item">
-					<label for="shop_price" class="layui-form-label">优惠价/现价</label>
+					<label for="shop_price" class="layui-form-label">优惠价/现价
+					</label>
 					<div class="layui-input-inline">
 						<input type="text" id="shop_price" name="fshop_price" required=""
-							lay-verify="required" autocomplete="off" value=""
+							lay-verify="required" autocomplete="off" value="${food.food.fshop_price }"
 							class="layui-input">
 					</div>
 					<div class="layui-form-mid layui-word-aux">
@@ -67,7 +76,8 @@
 			</div>
 			<!-- 图片 -->
 			<div class="layui-form-item">
-				<label for="food_image" class="layui-form-label">图片</label>
+				<label for="food_image" class="layui-form-label">图片
+				</label>
 				<div class="layui-input-inline">
 					<input type="file" name="add_pic" lay-verify="required" 
 						style="padding-top: 10px"/>
@@ -80,17 +90,17 @@
 			<div class="layui-form-item layui-form-text">
 			    <label class="layui-form-label">菜品描述</label>
 			    <div class="layui-input-block">
-			      <textarea name="fdesc" placeholder="请输入内容" class="layui-textarea"></textarea>
+			      <textarea name="fdesc" placeholder="请输入内容" class="layui-textarea">${food.food.fdesc }</textarea>
 			    </div>
 			</div>	
-			<!-- 菜品类别 -->
+			<!-- 菜品类别 --><!-- 类别回显使用函数 -->
 			<div class="layui-form-item">
 			    <label class="layui-form-label">选择菜品类别</label>
 			    <div class="layui-input-inline">
 			      <select name="fcwc_id" lay-verify="required" >
 			        <option value="">菜品种类</option>
 			        <c:forEach items="${foodCategories }" var="fc">
-		         		<option value="${fc.pk_fcwc_id }">${fc.fcwc_name }</option>
+		         		<option class="mfc" value="${fc.pk_fcwc_id }">${fc.fcwc_name }</option>
 		         	</c:forEach>
 			      </select>
 			    </div>
@@ -101,7 +111,7 @@
 			      <select name="ftc_id" lay-verfiy="required">
 	         		<option value="">荤/素</option>
 		         	<c:forEach items="${foodTypes }" var="ft">
-			         	<option value="${ft.pk_ftc_id }">${ft.ftc_name }</option>
+			         	<option class="mft" value="${ft.pk_ftc_id }">${ft.ftc_name }</option>
 		         	</c:forEach>
 	       		  </select>
 			    </div>
@@ -109,11 +119,11 @@
 					<span class="x-red">*</span>
 				</div>
 			</div>
-			<!-- 是否在售 -->
+			<!-- 是否在售 --><!-- 回显使用函数 -->
 			<div class="layui-form-item">
 			    <label class="layui-form-label">是否在售</label>
 			    <div class="layui-input-inline">
-			      <input type="radio" name="fis_onsale" value="1" title="在售" checked>
+			      <input type="radio" name="fis_onsale" value="1" title="在售" >
 			      <input type="radio" name="fis_onsale" value="0" title="下架" >
 			    </div>
 			    <div class="layui-form-mid layui-word-aux">
@@ -124,7 +134,7 @@
 			<div class="layui-form-item" >
 				<div class="layui-input-block">
 					<button class="layui-btn" type="submit" lay-filter="add" id="btn_submit"
-						lay-submit="" >增加</button>
+						lay-submit="" >修改</button>
 					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 				</div>
 			</div>
@@ -139,16 +149,10 @@
 			//自定义验证规则
 			form.verify({
 				nikename : function(value) {
-					if (value.length < 5) {
-						return '昵称至少得5个字符啊';
+					if (value.length < 2) {
+						return '菜名至少得2个字符啊';
 					}
 				},
-				pass : [ /(.+){6,12}$/, '密码必须6到12位' ],
-				repass : function(value) {
-					if ($('#L_pass').val() != $('#L_repass').val()) {
-						return '两次密码不一致';
-					}
-				}
 			});
 
 			

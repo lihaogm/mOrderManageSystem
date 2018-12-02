@@ -24,6 +24,7 @@
 	}
 </script>
 
+
 <body>
   <div class="x-nav">
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新"><!--   -->
@@ -34,7 +35,7 @@
   <i id="irefresh" onclick="refresh()"></i>
   <div class="x-body">
     <div class="layui-row">
-      <form class="layui-form layui-col-md12 x-so">
+      <form class="layui-form layui-col-md12 x-so" action="${pageContext.request.contextPath }/foodSearch" method="post">
 	        <div class="layui-inline">
 	       		<select name="foodcook_category" lay-verfiy="required" >
 		         	<option value="">菜品种类</option>
@@ -59,10 +60,10 @@
 	       		</select>
 	       	</div>
 	       	<div class="layui-inline">
-	       		<input type="text" name="username"  placeholder="请输入菜名" autocomplete="off" class="layui-input">
+	       		<input type="text" name="foodname"  placeholder="请输入菜名" autocomplete="off" class="layui-input">
 	       	</div>
 	       	<div class="layui-inline">
-	       		<button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+	       		<button class="layui-btn"  lay-submit="" lay-filter="sreach" type="submit"><i class="layui-icon">&#xe615;</i></button>
 	       	</div>
       </form>
     </div>
@@ -95,26 +96,34 @@
 	        <tr>
 	          <td>
 	            <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+	          	<i class="mi" style="display:none">${food.food.pk_fid };</i>
 	          </td>
 	          <td>${vs.count }</td>
 	          <td>${food.food.fname }</td>
 	          <td>￥${food.food.fmarket_price }</td>
 	          <td>￥${food.food.fshop_price }</td>
 	          <td>
-	          	<img src="${pageContext.request.contextPath }/${food.food.fimage}" width="45" height="40"></td>
+	          	<img src="${pageContext.request.contextPath }/${food.food.fimage}" width="45" height="40" ></td>
 	          <td>${food.food.fcreat_date }</td>
 	          <td>${food.food.fmodified_date }</td>
 	          <td>${food.food.fis_hot==1?"热门":"" }</td>
 	          <td>
 	          	<span onclick="showDesc('${food.food.fdesc}')" title="${food.food.fdesc}">...</span>
 	          </td>
-	          <td>${food.foodCategoryName },${food.foodTypeName }</td>
+	          <td>${food.foodCategoryName }
+	          	<c:if test="${food.foodTypeName=='无'} ">
+		          	
+		        </c:if>
+		        <c:if test="${food.foodTypeName!='无' }">
+					, ${food.foodTypeName }		        
+		        </c:if>
+		      </td>
 	          <td>${food.food.fis_onsale==1?"在售":"下架" }</td>
 	          <td class="td-manage">
-	            <a title="编辑"  onclick="x_admin_show('编辑','?????')" href="javascript:;">
+	            <a title="编辑"  onclick="x_admin_show('编辑','${pageContext.request.contextPath }/foodPreparedEdit?fid=${food.food.pk_fid }')" href="javascript:;">
 	              <i class="layui-icon">&#xe642;</i>
 	            </a>
-	            <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+	            <a title="删除" onclick="member_del(this,'${food.food.pk_fid}')" href="javascript:;">
 	              <i class="layui-icon">&#xe640;</i>
 	            </a>
 	          </td>
@@ -160,19 +169,22 @@
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
             //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!',{icon:1,time:1000});
+            /* $(obj).parents("tr").remove(); */
+            /* layer.msg('已删除!',{icon:1,time:1000}); */
+            location.href="${pageContext.request.contextPath}/foodDelete?fcId="+id;
         });
     }
 
-    function delAll (argument) {
+    function delAll () {
 
-      var data = tableCheck.getData();
+      /* var data = tableCheck.getData(); */
 
-      layer.confirm('确认要删除吗？'+data,function(index){
-          //捉到所有被选中的，发异步进行删除
+      layer.confirm('确认要删除吗？',function(index){
+          /* //捉到所有被选中的，发异步进行删除
           layer.msg('删除成功', {icon: 1});
-          $(".layui-form-checked").not('.header').parents('tr').remove();
+          $(".layui-form-checked").not('.header').parents('tr').remove(); */
+    	  var fcids=$("div.layui-form-checked + i.mi").text();
+		  location.href="${pageContext.request.contextPath}/foodMultiDelete?fcids="+fcids;
       });
     }
   </script>

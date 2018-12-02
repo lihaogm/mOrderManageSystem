@@ -6,12 +6,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lihaogn.service.AdminService;
+import com.lihaogn.service.FoodService;
 
 /**
- * Servlet implementation class AdminMutilDeleteServlet
+ * Servlet implementation class FoodDeleteServlet
  */
-public class AdminMutilDeleteServlet extends HttpServlet {
+public class FoodDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -19,14 +19,10 @@ public class AdminMutilDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String aids = request.getParameter("aids");
-		
-//		String[] split = aids.split(")");
-		
-		AdminService service = new AdminService();
-		service.deleteMutilAdminByAid(aids);
-		
-		response.sendRedirect(request.getContextPath()+"/adminList");
+		String fcId = request.getParameter("fcId");
+		FoodService foodService = new FoodService();
+		foodService.deleteFoodById(fcId);
+		response.sendRedirect(request.getContextPath()+"/foodList");
 	}
 
 	/**
