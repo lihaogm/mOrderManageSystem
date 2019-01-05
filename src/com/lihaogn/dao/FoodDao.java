@@ -23,7 +23,7 @@ public class FoodDao {
 	 */
 	public List<FoodCategory> getAllFoodCategory() throws SQLException {
 		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
-		String sql="select * from food_cook_way_category";
+		String sql="select * from food_cook_way_category order by pk_fcwc_id";
 		List<FoodCategory> foodCategories = runner.query(sql, new BeanListHandler<FoodCategory>(FoodCategory.class));
 //		System.out.println("sql:"+foodCategories);
 		return foodCategories;
@@ -101,7 +101,7 @@ public class FoodDao {
 	 */
 	public List<Food> getAllFood() throws SQLException {
 		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
-		String sql="select * from food";
+		String sql="select * from food order by fcwc_id";
 		
 		return runner.query(sql, new BeanListHandler<Food>(Food.class));
 	}

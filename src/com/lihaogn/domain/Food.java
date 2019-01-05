@@ -14,9 +14,16 @@ public class Food {
 	private short fis_onsale;
 	private String fcwc_id;
 	private int ftc_id;
+	private long food_sales_num;
 //	private FoodCategory foodCategory;
 //	private FoodType foodType;
 	
+	public long getFood_sales_num() {
+		return food_sales_num;
+	}
+	public void setFood_sales_num(long food_sales_num) {
+		this.food_sales_num = food_sales_num;
+	}
 	public String getPk_fid() {
 		return pk_fid;
 	}

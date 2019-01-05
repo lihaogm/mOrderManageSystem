@@ -4,6 +4,6 @@
 		<property name="user">root</property>
 		<property name="password">rootroot</property>
 		<property name="driverClass">com.mysql.jdbc.Driver</property>
-		<property name="jdbcUrl">jdbc:mysql:///mOrder?useUnicode=true&amp;characterEncoding=UTF8</property>
+		<property name="jdbcUrl">jdbc:mysql://106.14.203.87:3306/mOrder?useUnicode=true&amp;characterEncoding=UTF8</property>
 	</default-config> 
 </c3p0-config> 

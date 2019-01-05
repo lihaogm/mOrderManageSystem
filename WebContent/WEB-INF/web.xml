@@ -2,12 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>mOrder</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>
@@ -228,5 +223,25 @@
   <servlet-mapping>
     <servlet-name>FoodSearchServlet</servlet-name>
     <url-pattern>/foodSearch</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>WXFoodListServlet</display-name>
+    <servlet-name>WXFoodListServlet</servlet-name>
+    <servlet-class>com.lihaogn.web.WXFoodListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WXFoodListServlet</servlet-name>
+    <url-pattern>/wxFoodList</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>WXOrderAddServlet</display-name>
+    <servlet-name>WXOrderAddServlet</servlet-name>
+    <servlet-class>com.lihaogn.web.WXOrderAddServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WXOrderAddServlet</servlet-name>
+    <url-pattern>/wxOrderAdd</url-pattern>
   </servlet-mapping>
 </web-app>
