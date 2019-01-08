@@ -1,6 +1,7 @@
 package com.lihaogn.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -12,6 +13,8 @@ import com.lihaogn.domain.Food;
 import com.lihaogn.domain.FoodCategory;
 import com.lihaogn.domain.FoodType;
 import com.lihaogn.utils.DataSourceUtils;
+import com.lihaogn.vo.Condition;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class FoodDao {
 
@@ -169,11 +172,11 @@ ftc_id: 3]
 	 * @return
 	 * @throws SQLException 
 	 */
-	public long getFoodAllCount() throws SQLException {
+	public int getFoodAllCount() throws SQLException {
 		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
 		String sql="select count(*) from food";
-		
-		return (long) runner.query(sql, new ScalarHandler());
+		Long query = (Long) runner.query(sql, new ScalarHandler());
+		return query.intValue();
 	}
 
 	/**
@@ -233,12 +236,12 @@ ftc_id: 3]
 	 * @return
 	 * @throws SQLException 
 	 */
-	public Food getFoodByName(String foodName) throws SQLException {
-		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
-		String sql="select * from food where fname=?";
-		
-		return runner.query(sql, new BeanHandler<Food>(Food.class), foodName);
-	}
+//	public Food getFoodByName(String foodName) throws SQLException {
+//		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+//		String sql="select * from food where fname=?";
+//		
+//		return runner.query(sql, new BeanHandler<Food>(Food.class), foodName);
+//	}
 
 	/**
 	 * 根据种类获取菜品信息
@@ -248,26 +251,26 @@ ftc_id: 3]
 	 * @return
 	 * @throws SQLException 
 	 */
-	public List<Food> getFoodByCategoryType(String foodCategoryId, int foodTypeId, int i) throws SQLException {
-		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
-		String sql=null;
-		List<Food> foods=null;
-		if (i==0) {
-			sql="select * from food where fcwc_id=? and ftc_id=?";
-			foods = runner.query(sql, new BeanListHandler<Food>(Food.class), 
-					foodCategoryId,foodTypeId);
-		}else if (i==1) {
-			sql="select * from food where fcwc_id=?";
-			foods = runner.query(sql, new BeanListHandler<Food>(Food.class), 
-					foodCategoryId);
-		}else if (i==2) {
-			sql="select * from food where ftc_id=?";
-			foods = runner.query(sql, new BeanListHandler<Food>(Food.class), 
-					foodTypeId);
-		}
-		
-		return foods;
-	}
+//	public List<Food> getFoodByCategoryType(String foodCategoryId, int foodTypeId, int i) throws SQLException {
+//		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+//		String sql=null;
+//		List<Food> foods=null;
+//		if (i==0) {
+//			sql="select * from food where fcwc_id=? and ftc_id=?";
+//			foods = runner.query(sql, new BeanListHandler<Food>(Food.class), 
+//					foodCategoryId,foodTypeId);
+//		}else if (i==1) {
+//			sql="select * from food where fcwc_id=?";
+//			foods = runner.query(sql, new BeanListHandler<Food>(Food.class), 
+//					foodCategoryId);
+//		}else if (i==2) {
+//			sql="select * from food where ftc_id=?";
+//			foods = runner.query(sql, new BeanListHandler<Food>(Food.class), 
+//					foodTypeId);
+//		}
+//		
+//		return foods;
+//	}
 
 	/**
 	 * 搜索的菜品记录条数
@@ -294,6 +297,33 @@ ftc_id: 3]
 		}
 		
 		return itemCount;
+	}
+
+	public List<Food> getFoolListByConditon(Condition condition) throws SQLException {
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+		// 定义一个存储实际参数的容器
+		ArrayList<String> list = new ArrayList<String>();
+		String sql="select * from food where 1=1";
+		if (condition.getFoodCookCategory()!=null&&!"".equals(condition.getFoodCookCategory())) {
+			sql+=" and fcwc_id=? ";
+			list.add(condition.getFoodCookCategory());
+		}
+		if(condition.getFoodTypeCategory()!=null&&!"".equals(condition.getFoodTypeCategory())) {
+			sql+=" and ftc_id=? ";
+			list.add(condition.getFoodTypeCategory());
+		}
+		if(condition.getFoodName()!=null&&!"".equals(condition.getFoodName().trim())) {
+			sql+=" and fname like ? ";
+			list.add("%"+condition.getFoodName()+"%");
+		}
+		
+		return runner.query(sql, new BeanListHandler<Food>(Food.class),list.toArray());
+	}
+
+	public List<Food> getFoodListByPage(int index, int currentCount) throws SQLException {
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql="select * from food limit ?,?";
+		return runner.query(sql, new BeanListHandler<Food>(Food.class),index,currentCount);
 	}
 
 }

@@ -1,17 +1,22 @@
 package com.lihaogn.web;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 import com.lihaogn.domain.FoodCategory;
 import com.lihaogn.domain.FoodType;
-import com.lihaogn.domain.PageBeanFood;
 import com.lihaogn.service.FoodService;
+import com.lihaogn.vo.Condition;
+import com.lihaogn.vo.PageBeanFood;
 
 /**
  * Servlet implementation class FoodSearchServlet
@@ -28,55 +33,44 @@ public class FoodSearchServlet extends HttpServlet {
 
 		request.setCharacterEncoding("utf-8");
 		
+		// 1 收集表单数据
+		Map<String, String[]> properties = request.getParameterMap();
+		// 2 将数据封装到vo实体中
+		Condition condition = new Condition();
+		try {
+			BeanUtils.populate(condition, properties);
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// 判断搜索条件是否为空，为空直接返回列表页
+		if ("".equals(condition.getFoodCookCategory())&&"".equals(condition.getFoodTypeCategory())&&"".equals(condition.getFoodName().trim())) {
+			response.sendRedirect(request.getContextPath()+"/foodList");
+			return;
+		}
+		
+		// 3 将实体传递给service层
 		FoodService foodService = new FoodService();
+		// 获取页面数据
+		List<PageBeanFood> listFoodPage=foodService.getFoodListByCondition(condition);
+		long itemCounts=listFoodPage.size();
+		request.setAttribute("foods", listFoodPage);
+		request.setAttribute("foodCounts", itemCounts);
+		
+		
 		// 获得所有菜品种类
 		List<FoodCategory> listFoodCategory=foodService.getAllFoodCategory();
 		request.setAttribute("foodCategories", listFoodCategory);
 		// 获得荤素种类
 		List<FoodType> listFoodType=foodService.getAllFoodType();
 		request.setAttribute("foodTypes", listFoodType);
+
+		request.setAttribute("condition", condition);
 		
-		// 获取菜品种类
-		String foodCategoryId = request.getParameter("foodcook_category");
-		// 获取荤素种类
-		int foodTypeId = 0;
-		String foodType = request.getParameter("foodtype_category");
-		if ("".equals(foodType)) {
-			foodTypeId = 4;
-		}else
-			foodTypeId=Integer.parseInt(foodType);
-		// 获取输入的菜品名
-		String foodName = request.getParameter("foodname");
-		
-		
-		// 输入的菜名和选择的种类分开起作用
-		if (!"".equals(foodName)) {
-			List<PageBeanFood> listFoodPage  = foodService.getFoodByName(foodName);
-			request.setAttribute("foods", listFoodPage);
-			request.setAttribute("foodCounts", 1);
-		}else if ((!"".equals(foodCategoryId)) && foodTypeId!=4) { // 类别都选了
-			List<PageBeanFood> listFoodPage = foodService.getFoodByCategoryType(foodCategoryId, foodTypeId,0);
-			request.setAttribute("foods", listFoodPage);
-			// 获取记录条数
-			long itemCount=foodService.getItemCount(foodCategoryId, foodTypeId,0);
-			request.setAttribute("foodCounts", itemCount);
-		}else if ((!"".equals(foodCategoryId)) && foodTypeId==4) { // 只选了菜品类别
-			List<PageBeanFood> listFoodPage = foodService.getFoodByCategoryType(foodCategoryId, foodTypeId,1);
-			request.setAttribute("foods", listFoodPage);
-			// 获取记录条数
-			long itemCount=foodService.getItemCount(foodCategoryId, foodTypeId,1);
-			request.setAttribute("foodCounts", itemCount);
-		}else if("".equals(foodCategoryId) && foodTypeId!=4) { // 只选了荤素类别
-			List<PageBeanFood> listFoodPage = foodService.getFoodByCategoryType(foodCategoryId, foodTypeId,2);
-			request.setAttribute("foods", listFoodPage);	
-			// 获取记录条数
-			long itemCount=foodService.getItemCount(foodCategoryId, foodTypeId,2);
-			request.setAttribute("foodCounts", itemCount);
-		}else {
-			response.sendRedirect(request.getContextPath()+"/foodList");
-			return;
-		}
-			
 		request.getRequestDispatcher("/food_list.jsp").forward(request, response);
 	}
 

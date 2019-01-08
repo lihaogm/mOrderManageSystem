@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lihaogn.domain.FoodCategory;
 import com.lihaogn.domain.FoodType;
-import com.lihaogn.domain.PageBeanFood;
 import com.lihaogn.service.FoodService;
+import com.lihaogn.vo.PageBeanFood;
 
 /**
  * Servlet implementation class FoodPreparedEditServlet

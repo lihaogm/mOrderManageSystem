@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.lihaogn.domain.Food;
 import com.lihaogn.domain.FoodCategory;
-import com.lihaogn.domain.PageBeanWXMenu;
 import com.lihaogn.service.FoodService;
+import com.lihaogn.vo.PageBeanWXMenu;
 
 /**
  * Servlet implementation class WXFoodListServlet

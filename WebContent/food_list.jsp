@@ -22,6 +22,11 @@
 			location.replace(location.href);
 		},500);
 	}
+	
+	$(function(){
+		$("#foodCookCategory option[value='${condition.foodCookCategory}']").prop("selected",true);
+		$("#foodTypeCategory option[value='${condition.foodTypeCategory}']").prop("selected",true);
+	})
 </script>
 
 
@@ -37,7 +42,7 @@
     <div class="layui-row">
       <form class="layui-form layui-col-md12 x-so" action="${pageContext.request.contextPath }/foodSearch" method="post">
 	        <div class="layui-inline">
-	       		<select name="foodcook_category" lay-verfiy="required" >
+	       		<select id="foodCookCategory" name="foodCookCategory" lay-verfiy="required" >
 		         	<option value="">菜品种类</option>
 		         	<c:forEach items="${foodCategories }" var="fc">
 		         		<option value="${fc.pk_fcwc_id }">${fc.fcwc_name }</option>
@@ -50,7 +55,7 @@
 	       		</select> 
 	       	</div>
 	       	<div class="layui-inline">
-	       		<select name="foodtype_category" lay-verfiy="required" >
+	       		<select id="foodTypeCategory" name="foodTypeCategory" lay-verfiy="required" >
 	         		<option value="">荤/素</option>
 	         		<c:forEach items="${foodTypes }" var="ft">
 			         	<option value="${ft.pk_ftc_id }">${ft.ftc_name }</option>
@@ -60,7 +65,7 @@
 	       		</select>
 	       	</div>
 	       	<div class="layui-inline">
-	       		<input type="text" name="foodname"  placeholder="请输入菜名" autocomplete="off" class="layui-input">
+	       		<input type="text" name="foodName"  placeholder="请输入菜名" autocomplete="off" class="layui-input" value="${condition.foodName}">
 	       	</div>
 	       	<div class="layui-inline">
 	       		<button class="layui-btn"  lay-submit="" lay-filter="sreach" type="submit"><i class="layui-icon">&#xe615;</i></button>
@@ -70,7 +75,7 @@
     <xblock>
       <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
       <button class="layui-btn" onclick="x_admin_show('添加菜品','${pageContext.request.contextPath}/foodPreparedAdd')"><i class="layui-icon"></i>添加</button>
-      <span class="x-right" style="line-height:40px">共有数据：${foodCounts } 条</span>
+      <span class="x-right" style="line-height:40px">共有数据：${pageBean.currentCount } 条</span>
     </xblock>
     <table class="layui-table" id="dataTable">
       <thead>
@@ -92,7 +97,7 @@
           <th>操作</th>
       </thead>
       <tbody>
-	      <c:forEach items="${foods }" var="food" varStatus="vs">
+	      <c:forEach items="${pageBean.foodList }" var="food" varStatus="vs">
 	        <tr>
 	          <td>
 	            <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
@@ -132,16 +137,38 @@
       </tbody>
     </table>
     <!-- 分页 -->
-    <!-- <div class="page">
+    <div class="page">
       <div>
-        <a class="prev" href="">&lt;&lt;</a>
-        <a class="num" href="">1</a>
-        <span class="current">2</span>
-        <a class="num" href="">3</a>
-        <a class="num" href="">489</a>
-        <a class="next" href="">&gt;&gt;</a>
+      
+      	<!-- 上一页 -->
+      	<c:if test="${pageBean.currentPage==1 }">
+      		<a class="prev" href="javascript:void(0);">&lt;&lt;</a>
+      	</c:if>
+        <c:if test="${pageBean.currentPage!=1 }">
+      		<a class="prev" href="${pageContext.request.contextPath }/foodList?currentPage=${pageBean.currentPage-1}">&lt;&lt;</a>
+      	</c:if>
+
+        
+        <c:forEach begin="1" end="${pageBean.totalPage }" var="page">
+        	<c:if test="${pageBean.currentPage==page }">
+        		<span class="current">${page }</span>
+        	</c:if>
+        	<c:if test="${pageBean.currentPage!=page }">
+        		<a href="${pageContext.request.contextPath }/foodList?currentPage=${page}">${page }</a>
+        	</c:if>
+        </c:forEach>
+        
+        <!-- 下一页 -->
+        <c:if test="${pageBean.currentPage==pageBean.totalPage }">
+      		<a class="next" href="javascript:void(0);">&gt;&gt;</a>
+      	</c:if>
+      	<c:if test="${pageBean.currentPage!=pageBean.totalPage }">
+      		<a class="next" href="${pageContext.request.contextPath }/foodList?currentPage=${pageBean.currentPage+1}">&gt;&gt;</a>
+      	</c:if>
+        
+        
       </div>
-    </div> -->
+    </div>
 
   </div>
   <script>
@@ -165,7 +192,7 @@
       });
     });
 
-    /*用户-删除*/
+    /*菜品-删除*/
     function member_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
             //发异步删除数据

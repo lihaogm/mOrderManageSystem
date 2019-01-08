@@ -1,6 +1,9 @@
-package com.lihaogn.domain;
+package com.lihaogn.vo;
 
 import java.util.List;
+
+import com.lihaogn.domain.Food;
+import com.lihaogn.domain.FoodCategory;
 
 public class PageBeanWXMenu {
 

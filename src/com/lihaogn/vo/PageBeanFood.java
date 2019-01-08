@@ -1,4 +1,6 @@
-package com.lihaogn.domain;
+package com.lihaogn.vo;
+
+import com.lihaogn.domain.Food;
 
 public class PageBeanFood {
 	
