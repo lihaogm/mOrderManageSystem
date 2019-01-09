@@ -123,4 +123,16 @@ public class AdminService {
 		
 	}
 
+	public boolean checkAdminName(String adminName) {
+		AdminDao adminDao = new AdminDao();
+		Long isExist=null;
+		try {
+			isExist = adminDao.checkAdminName(adminName);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isExist>0?true:false;
+	}
+
 }

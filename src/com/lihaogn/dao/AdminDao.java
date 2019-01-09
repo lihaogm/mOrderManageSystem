@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.lihaogn.domain.Admin;
 import com.lihaogn.utils.DataSourceUtils;
@@ -93,6 +94,13 @@ public class AdminDao {
 				admin.getCreate_time(),
 				admin.getAid());
 		
+	}
+
+	public Long checkAdminName(String adminName) throws SQLException {
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "select count(*) from admin where adminName=?";
+		Long query = (Long) runner.query(sql, new ScalarHandler(), adminName);
+		return query;
 	}
 
 }

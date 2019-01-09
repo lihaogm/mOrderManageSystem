@@ -58,7 +58,12 @@
 		            <td>${vs.count }</td>
 		            <td class="mtd" style="display:none">${admin.aid })</td>
 		            <td>${admin.adminName }</td>
-					<td>${admin.adminPrivilege }</td>
+		            <c:if test="${admin.adminPrivilege==1 }">
+		            	<td>超级管理员</td>
+		            </c:if>
+					<c:if test="${admin.adminPrivilege==2 }">
+		            	<td>普通管理员</td>
+		            </c:if>
 					<td>${admin.create_time}</td>
 		            <td class="td-manage">
 						<a title="编辑" onclick="x_admin_show('编辑','${pageContext.request.contextPath }/adminPreparedUpdate?aid=${admin.aid }')" href="javascript:;"> 

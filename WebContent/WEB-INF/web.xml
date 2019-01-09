@@ -244,4 +244,24 @@
     <servlet-name>WXOrderAddServlet</servlet-name>
     <url-pattern>/wxOrderAdd</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminNameCheckServlet</display-name>
+    <servlet-name>AdminNameCheckServlet</servlet-name>
+    <servlet-class>com.lihaogn.web.AdminNameCheckServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminNameCheckServlet</servlet-name>
+    <url-pattern>/checkAdminName</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FoodSearchWordServlet</display-name>
+    <servlet-name>FoodSearchWordServlet</servlet-name>
+    <servlet-class>com.lihaogn.web.FoodSearchWordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FoodSearchWordServlet</servlet-name>
+    <url-pattern>/foodSearchWord</url-pattern>
+  </servlet-mapping>
 </web-app>

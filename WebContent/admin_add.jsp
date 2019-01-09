@@ -17,6 +17,36 @@
 	<script type="text/javascript" src="./lib/layui/layui.js"
 		charset="utf-8"></script>
 	<script type="text/javascript" src="./js/xadmin.js"></script>
+	<script type="text/javascript">
+		
+		$(function(){
+			// 为输入框绑定事件
+			$("#username").blur(function(){
+				// 1  失去焦点获得输入框内容
+				var content=$(this).val();
+				//alert(content);
+				// 2 去服务端校验用户名是否存在
+				$.post(
+					"${pageContext.request.contextPath}/checkAdminName",
+					{"adminName":content},
+					function(data){
+						var isExist=data.isExist;
+						// 3 根据返回 的isExist动态显示信息
+						var adminNameInfo="";
+						if(isExist){
+							adminNameInfo="此名称已经存在";
+							$("#adminNameCheckInfo").css("color","red");
+						}else{
+							adminNameInfo="此名称可以使用";
+							$("#adminNameCheckInfo").css("color","green");
+						}
+						$("#adminNameCheckInfo").html(adminNameInfo);
+					},
+					"json"
+				);	
+			});
+		});
+	</script>
 
 </head>
 
@@ -35,6 +65,9 @@
 				<div class="layui-form-mid layui-word-aux">
 					<span class="x-red">*</span>将会成为您唯一的登入名
 				</div>
+				<div class="layui-form-mid layui-word-aux">
+					<span id="adminNameCheckInfo"></span>
+				</div>
 			</div>
 			
 			<div class="layui-form-item">
@@ -44,6 +77,7 @@
 					<input type="radio" name="adminPrivilege" lay-skin="primary" title="编辑人员" value="2">
 				</div>
 			</div>
+			
 			<div class="layui-form-item">
 				<label for="L_pass" class="layui-form-label"> <span class="x-red">*</span>密码</label>
 				<div class="layui-input-inline">
@@ -52,6 +86,7 @@
 				</div>
 				<div class="layui-form-mid layui-word-aux">6到16个字符</div>
 			</div>
+			
 			<div class="layui-form-item">
 				<label for="L_repass" class="layui-form-label"> 
 					<span class="x-red">*</span>确认密码

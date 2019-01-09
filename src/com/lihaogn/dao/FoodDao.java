@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.lihaogn.domain.Food;
@@ -14,7 +15,6 @@ import com.lihaogn.domain.FoodCategory;
 import com.lihaogn.domain.FoodType;
 import com.lihaogn.utils.DataSourceUtils;
 import com.lihaogn.vo.Condition;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class FoodDao {
 
@@ -280,26 +280,114 @@ ftc_id: 3]
 	 * @return
 	 * @throws SQLException 
 	 */
-	public long getItemCount(String foodCategoryId, int foodTypeId, int i) throws SQLException {
+//	public long getItemCount(String foodCategoryId, int foodTypeId, int i) throws SQLException {
+//		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+//		String sql=null;
+//		long itemCount=0;
+//		
+//		if (i==0) {
+//			sql="select count(*) from food where fcwc_id=? and ftc_id=?";
+//			itemCount=(long) runner.query(sql, new ScalarHandler(), foodCategoryId,foodTypeId);
+//		}else if (i==1) {
+//			sql="select count(*) from food where fcwc_id=?";
+//			itemCount=(long) runner.query(sql, new ScalarHandler(), foodCategoryId);
+//		}else if (i==2) {
+//			sql="select count(*) from food where ftc_id=?";
+//			itemCount=(long) runner.query(sql, new ScalarHandler(), foodTypeId);
+//		}
+//		
+//		return itemCount;
+//	}
+
+	/**
+	 * 根据条件搜索菜品
+	 * @param condition
+	 * @return
+	 * @throws SQLException
+	 */
+//	public List<Food> getFoolListByConditon(Condition condition) throws SQLException {
+//		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+//		// 定义一个存储实际参数的容器
+//		ArrayList<String> list = new ArrayList<String>();
+//		String sql="select * from food where 1=1";
+//		if (condition.getFoodCookCategory()!=null&&!"".equals(condition.getFoodCookCategory())) {
+//			sql+=" and fcwc_id=? ";
+//			list.add(condition.getFoodCookCategory());
+//		}
+//		if(condition.getFoodTypeCategory()!=null&&!"".equals(condition.getFoodTypeCategory())) {
+//			sql+=" and ftc_id=? ";
+//			list.add(condition.getFoodTypeCategory());
+//		}
+//		if(condition.getFoodName()!=null&&!"".equals(condition.getFoodName().trim())) {
+//			sql+=" and fname like ? ";
+//			list.add("%"+condition.getFoodName()+"%");
+//		}
+//		
+//		return runner.query(sql, new BeanListHandler<Food>(Food.class),list.toArray());
+//	}
+
+	/**
+	 * 按索引搜索菜品
+	 * @param index
+	 * @param currentCount
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Food> getFoodListByPage(int index, int currentCount) throws SQLException {
 		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
-		String sql=null;
-		long itemCount=0;
-		
-		if (i==0) {
-			sql="select count(*) from food where fcwc_id=? and ftc_id=?";
-			itemCount=(long) runner.query(sql, new ScalarHandler(), foodCategoryId,foodTypeId);
-		}else if (i==1) {
-			sql="select count(*) from food where fcwc_id=?";
-			itemCount=(long) runner.query(sql, new ScalarHandler(), foodCategoryId);
-		}else if (i==2) {
-			sql="select count(*) from food where ftc_id=?";
-			itemCount=(long) runner.query(sql, new ScalarHandler(), foodTypeId);
-		}
-		
-		return itemCount;
+		String sql="select * from food limit ?,?";
+		return runner.query(sql, new BeanListHandler<Food>(Food.class),index,currentCount);
 	}
 
-	public List<Food> getFoolListByConditon(Condition condition) throws SQLException {
+	/**
+	 * 根据词组搜索菜品名称
+	 * @param word
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Object> findFoodByWord(String word) throws SQLException {
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql="select * from food where fname like ? limit 0,8";
+		List<Object> query = runner.query(sql, new ColumnListHandler("fname"), "%"+word+"%");
+		return query;
+	}
+
+	/**
+	 * 根据条件搜索菜品的记录数
+	 * @param condition
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int getFoodAllCountByCondition(Condition condition) throws SQLException {
+		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+		// 定义一个存储实际参数的容器
+		ArrayList<String> list = new ArrayList<String>();
+		String sql="select count(*) from food where 1=1";
+		if (condition.getFoodCookCategory()!=null&&!"".equals(condition.getFoodCookCategory())) {
+			sql+=" and fcwc_id=? ";
+			list.add(condition.getFoodCookCategory());
+		}
+		if(condition.getFoodTypeCategory()!=null&&!"".equals(condition.getFoodTypeCategory())) {
+			sql+=" and ftc_id=? ";
+			list.add(condition.getFoodTypeCategory());
+		}
+		if(condition.getFoodName()!=null&&!"".equals(condition.getFoodName().trim())) {
+			sql+=" and fname like ? ";
+			list.add("%"+condition.getFoodName()+"%");
+		}
+		Long query = (Long) runner.query(sql, new ScalarHandler(),list.toArray());
+		return query.intValue();
+	}
+
+	/**
+	 * 根据搜索条件分页显示菜品
+	 * @param index
+	 * @param currentCount
+	 * @param condition
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Food> getFoodListByPageByCondition(int index, int currentCount, Condition condition) throws SQLException {
 		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
 		// 定义一个存储实际参数的容器
 		ArrayList<String> list = new ArrayList<String>();
@@ -316,14 +404,10 @@ ftc_id: 3]
 			sql+=" and fname like ? ";
 			list.add("%"+condition.getFoodName()+"%");
 		}
-		
+		sql+=" limit ?,?";
+		list.add(index+"");
+		list.add(currentCount+"");
 		return runner.query(sql, new BeanListHandler<Food>(Food.class),list.toArray());
-	}
-
-	public List<Food> getFoodListByPage(int index, int currentCount) throws SQLException {
-		QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
-		String sql="select * from food limit ?,?";
-		return runner.query(sql, new BeanListHandler<Food>(Food.class),index,currentCount);
 	}
 
 }

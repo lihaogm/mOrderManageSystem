@@ -27,6 +27,40 @@
 		$("#foodCookCategory option[value='${condition.foodCookCategory}']").prop("selected",true);
 		$("#foodTypeCategory option[value='${condition.foodTypeCategory}']").prop("selected",true);
 	})
+
+	function overFn(obj){
+		$(obj).css("background","#DBEAF9");
+	}
+	function outFn(obj){
+		$(obj).css("background","#fff");
+	}
+	
+	function clickFn(obj){
+		$("#foodNameInput").val($(obj).html());
+		$("#showDiv").css("display","none");
+	}
+	function searchWord(obj){
+		// 1 获得输入框内容
+		var word = $(obj).val();
+		// alert(word)
+		// 2 根据输入框的内容去数据库中模糊查询---List<Food>
+		var content = "";
+		$.post(
+			"${pageContext.request.contextPath}/foodSearchWord",
+			{"word":word},
+			function(data){
+				//3、将返回的商品的名称 现在showDiv中
+				if(data.length>0){
+					for(var i=0;i<data.length;i++){
+						content+="<div style='padding:5px;cursor:pointer' onclick='clickFn(this)' onmouseover='overFn(this)' onmouseout='outFn(this)'>"+data[i]+"</div>";
+					}
+					$("#showDiv").html(content);
+					$("#showDiv").css("display","block");
+				}
+			},
+			"json"
+		);
+	}
 </script>
 
 
@@ -41,31 +75,28 @@
   <div class="x-body">
     <div class="layui-row">
       <form class="layui-form layui-col-md12 x-so" action="${pageContext.request.contextPath }/foodSearch" method="post">
+        	<!-- 选择菜品种类 -->
 	        <div class="layui-inline">
 	       		<select id="foodCookCategory" name="foodCookCategory" lay-verfiy="required" >
 		         	<option value="">菜品种类</option>
 		         	<c:forEach items="${foodCategories }" var="fc">
 		         		<option value="${fc.pk_fcwc_id }">${fc.fcwc_name }</option>
-		         	<!-- <option value="1">炒菜</option>
-		         	<option value="2">烧菜</option>
-		         	<option value="3">蒸菜</option>
-		         	<option value="4">汤羹</option>
-		         	<option value="5">主食</option> -->
 		         	</c:forEach>
 	       		</select> 
-	       	</div>
+           </div>
+           <!-- 选择荤素种类 -->
 	       	<div class="layui-inline">
 	       		<select id="foodTypeCategory" name="foodTypeCategory" lay-verfiy="required" >
 	         		<option value="">荤/素</option>
 	         		<c:forEach items="${foodTypes }" var="ft">
-			         	<option value="${ft.pk_ftc_id }">${ft.ftc_name }</option>
-			         	<!-- <option value="1">小荤</option>
-			         	<option value="1">大荤</option>	 -->	
+			         	<option value="${ft.pk_ftc_id }">${ft.ftc_name }</option>	
 		         	</c:forEach>	
 	       		</select>
-	       	</div>
+           </div>
+           <!-- 输入菜名 -->
 	       	<div class="layui-inline">
-	       		<input type="text" name="foodName"  placeholder="请输入菜名" autocomplete="off" class="layui-input" value="${condition.foodName}">
+             <input id="foodNameInput" type="text" name="foodName" placeholder="请输入菜名" autocomplete="off" class="layui-input" value="${condition.foodName}" onkeyup="searchWord(this)" >
+             <div id="showDiv" style="display:none; position:absolute;z-index:1000;background:#fff; width:190px;border:1px solid #ccc;"></div>
 	       	</div>
 	       	<div class="layui-inline">
 	       		<button class="layui-btn"  lay-submit="" lay-filter="sreach" type="submit"><i class="layui-icon">&#xe615;</i></button>
@@ -75,7 +106,7 @@
     <xblock>
       <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
       <button class="layui-btn" onclick="x_admin_show('添加菜品','${pageContext.request.contextPath}/foodPreparedAdd')"><i class="layui-icon"></i>添加</button>
-      <span class="x-right" style="line-height:40px">共有数据：${pageBean.currentCount } 条</span>
+      <span class="x-right" style="line-height:40px">共有数据：${pageBean.totalCount } 条</span>
     </xblock>
     <table class="layui-table" id="dataTable">
       <thead>
@@ -137,6 +168,7 @@
       </tbody>
     </table>
     <!-- 分页 -->
+    
     <div class="page">
       <div>
       
@@ -165,10 +197,10 @@
       	<c:if test="${pageBean.currentPage!=pageBean.totalPage }">
       		<a class="next" href="${pageContext.request.contextPath }/foodList?currentPage=${pageBean.currentPage+1}">&gt;&gt;</a>
       	</c:if>
-        
-        
+      	
       </div>
     </div>
+    
 
   </div>
   <script>

@@ -11,7 +11,6 @@ import com.lihaogn.domain.FoodType;
 import com.lihaogn.vo.Condition;
 import com.lihaogn.vo.PageBeanFood;
 import com.lihaogn.vo.PageBean;
-import com.sun.org.apache.bcel.internal.generic.DALOAD;
 
 public class FoodService {
 
@@ -380,25 +379,25 @@ public class FoodService {
 	 * @param condition
 	 * @return
 	 */
-	public List<PageBeanFood> getFoodListByCondition(Condition condition) {
-		FoodDao foodDao = new FoodDao();
-		List<PageBeanFood> listPageBeanFood = new ArrayList<PageBeanFood>();
-		try {
-			List<Food> foodList = foodDao.getFoolListByConditon(condition);
-			for (Food food : foodList) {
-				PageBeanFood pageBeanFood = new PageBeanFood();
-				pageBeanFood.setFood(food);
-				pageBeanFood.setFoodCategoryName(foodDao.getFoodCategoryByid(food.getFcwc_id()));
-				pageBeanFood.setFoodTypeName(foodDao.getFoodTypeNameById(food.getFtc_id()));
-
-				listPageBeanFood.add(pageBeanFood);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return listPageBeanFood;
-	}
+//	public List<PageBeanFood> getFoodListByCondition(Condition condition) {
+//		FoodDao foodDao = new FoodDao();
+//		List<PageBeanFood> listPageBeanFood = new ArrayList<PageBeanFood>();
+//		try {
+//			List<Food> foodList = foodDao.getFoolListByConditon(condition);
+//			for (Food food : foodList) {
+//				PageBeanFood pageBeanFood = new PageBeanFood();
+//				pageBeanFood.setFood(food);
+//				pageBeanFood.setFoodCategoryName(foodDao.getFoodCategoryByid(food.getFcwc_id()));
+//				pageBeanFood.setFoodTypeName(foodDao.getFoodTypeNameById(food.getFtc_id()));
+//
+//				listPageBeanFood.add(pageBeanFood);
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return listPageBeanFood;
+//	}
 
 	/**
 	 * 获取每页菜品
@@ -430,6 +429,63 @@ public class FoodService {
 			int index = (currentPage - 1) * currentCount;
 			// 获取每页的菜品列表
 			List<Food> foodList = foodDao.getFoodListByPage(index, currentCount);
+
+			for (Food food : foodList) {
+				PageBeanFood pageBeanFood = new PageBeanFood();
+				pageBeanFood.setFood(food);
+				pageBeanFood.setFoodCategoryName(foodDao.getFoodCategoryByid(food.getFcwc_id()));
+				pageBeanFood.setFoodTypeName(foodDao.getFoodTypeNameById(food.getFtc_id()));
+
+				listPageBeanFood.add(pageBeanFood);
+			}
+			pageBean.setFoodList(listPageBeanFood);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pageBean;
+	}
+
+	/**
+	 * 根据输入词组找菜品名
+	 * @param word
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Object> findFoodByWord(String word) throws SQLException {
+		FoodDao foodDao = new FoodDao();
+		
+		return foodDao.findFoodByWord(word);
+	}
+
+	/**
+	 * 根据搜索条件分页显示菜品
+	 * @param currentPage
+	 * @param currentCount
+	 * @param condition
+	 * @return
+	 */
+	public PageBean getPageBeanByCondition(int currentPage, int currentCount, Condition condition) {
+		FoodDao foodDao = new FoodDao();
+		PageBean pageBean = new PageBean();
+		List<PageBeanFood> listPageBeanFood = new ArrayList<PageBeanFood>();
+		try {
+			// 当前页
+			pageBean.setCurrentPage(currentPage);
+			// 当前页显示条数
+			pageBean.setCurrentCount(currentCount);
+			// 总条数
+			int totalCount = foodDao.getFoodAllCountByCondition(condition);
+			pageBean.setTotalCount(totalCount);
+			// 总页数
+			int totalPage = (int) Math.ceil(1.0 * totalCount / currentCount);
+			pageBean.setTotalPage(totalPage);
+			// 每页显示 的数据
+			int index = (currentPage - 1) * currentCount;
+			// 获取每页的菜品列表
+			
+			List<Food> foodList = foodDao.getFoodListByPageByCondition(index, currentCount,condition);
 
 			for (Food food : foodList) {
 				PageBeanFood pageBeanFood = new PageBeanFood();
