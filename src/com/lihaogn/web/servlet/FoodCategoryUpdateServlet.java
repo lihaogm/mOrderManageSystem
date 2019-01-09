@@ -1,17 +1,21 @@
-package com.lihaogn.web;
+package com.lihaogn.web.servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.lihaogn.domain.FoodCategory;
 import com.lihaogn.service.FoodService;
 
 /**
- * Servlet implementation class FoodCategoryMultiDeleteServlet
+ * Servlet implementation class FoodCategoryUpdateServlet
  */
-public class FoodCategoryMultiDeleteServlet extends HttpServlet {
+public class FoodCategoryUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -19,9 +23,22 @@ public class FoodCategoryMultiDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String fcIds = request.getParameter("fcids");
+		request.setCharacterEncoding("utf-8");
+		
+		String fcId = request.getParameter("fcid");
+		String categoryName = request.getParameter("category_name");
+		
+		FoodCategory foodCategory = new FoodCategory();
+		foodCategory.setPk_fcwc_id(fcId);
+		foodCategory.setFcwc_name(categoryName);
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String modifiedDate = dateFormat.format(new Date());
+		foodCategory.setFcwc_modified_time(modifiedDate);
+		
 		FoodService service = new FoodService();
-		service.deleteMutilFoodCategoryById(fcIds);
+		service.editFoodCategory(foodCategory);
+		
 		response.sendRedirect(request.getContextPath()+"/foodCategoryList");
 	}
 

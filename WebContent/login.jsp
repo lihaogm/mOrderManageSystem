@@ -21,7 +21,7 @@
 <body class="login-bg">
     
     <div class="login">
-        <div class="message">管理登录</div>
+        <div class="message">管理员登录</div>
         <div id="darkbannerwrap"></div>
         
         <form method="post" class="layui-form" action="${pageContext.request.contextPath }/adminLogin" >
@@ -30,7 +30,9 @@
             <hr class="hr15">
             <input name="admin_password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
             <hr class="hr15">
-            <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+            <input type="checkbox" class="layui-input" name="checkbox_autoLogin" value="auto">自动登录
+            <hr class="hr15">
+            <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit" class="layui-input">
             <hr class="hr20" >
         </form>
         <div id="error-div">

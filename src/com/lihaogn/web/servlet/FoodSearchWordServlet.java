@@ -1,6 +1,7 @@
-package com.lihaogn.web;
+package com.lihaogn.web.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lihaogn.domain.Admin;
-import com.lihaogn.service.AdminService;
+import com.google.gson.Gson;
+import com.lihaogn.service.FoodService;
 
 /**
- * Servlet implementation class AdminListServlet
+ * Servlet implementation class FoodSearchWordServlet
  */
-public class AdminListServlet extends HttpServlet {
+public class FoodSearchWordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -22,11 +23,27 @@ public class AdminListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		AdminService adminService = new AdminService();
-		List<Admin> listAdmin=adminService.getAllAdmin();
+		//获得关键字
+		String word = request.getParameter("word");
+//		System.out.println(word);
 		
-		request.setAttribute("allAdmins", listAdmin);
-		request.getRequestDispatcher("/admin_list.jsp").forward(request, response);
+		FoodService foodService = new FoodService();
+		List<Object> foodList=null;
+		try {
+			foodList = foodService.findFoodByWord(word);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(foodList);
+//		System.out.println(json);
+		
+		response.setContentType("text/html;charset=UTF-8");
+		
+		response.getWriter().write(json);
+		
 		
 	}
 

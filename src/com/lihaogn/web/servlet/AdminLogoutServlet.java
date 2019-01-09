@@ -1,30 +1,27 @@
-package com.lihaogn.web;
+package com.lihaogn.web.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.lihaogn.service.AdminService;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class AdminDeleteServlet
+ * Servlet implementation class AdminLogoutServlet
  */
-public class AdminDeleteServlet extends HttpServlet {
+public class AdminLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String aid = request.getParameter("aid");
-		
-		AdminService service = new AdminService();
-		service.deleteAdminByAid(aid);
-		response.sendRedirect(request.getContextPath()+"/adminList");
-		
+		//用户注销
+		HttpSession session = request.getSession();
+		// 从session中删除admin
+		session.removeAttribute("admin");
+		response.sendRedirect(request.getContextPath()+"/admin_login.jsp");
 	}
 
 	/**

@@ -1,17 +1,20 @@
-package com.lihaogn.web;
+package com.lihaogn.web.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lihaogn.service.FoodService;
+import com.lihaogn.domain.Admin;
+import com.lihaogn.service.AdminService;
 
 /**
- * Servlet implementation class FoodMutilDeleteServlet
+ * Servlet implementation class AdminListServlet
  */
-public class FoodMultiDeleteServlet extends HttpServlet {
+public class AdminListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -19,11 +22,12 @@ public class FoodMultiDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String fcIds = request.getParameter("fcids");
-		FoodService foodService = new FoodService();
-		foodService.deleteMutilFoodById(fcIds);
+		AdminService adminService = new AdminService();
+		List<Admin> listAdmin=adminService.getAllAdmin();
 		
-		response.sendRedirect(request.getContextPath()+"/foodList");
+		request.setAttribute("allAdmins", listAdmin);
+		request.getRequestDispatcher("/admin_list.jsp").forward(request, response);
+		
 	}
 
 	/**

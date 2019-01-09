@@ -8,7 +8,7 @@
     <description></description>
     <display-name>AdminLoginServlet</display-name>
     <servlet-name>AdminLoginServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.AdminLoginServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.AdminLoginServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminLoginServlet</servlet-name>
@@ -18,7 +18,7 @@
     <description></description>
     <display-name>AdminLogoutServlet</display-name>
     <servlet-name>AdminLogoutServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.AdminLogoutServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.AdminLogoutServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminLogoutServlet</servlet-name>
@@ -28,7 +28,7 @@
     <description></description>
     <display-name>AdminListServlet</display-name>
     <servlet-name>AdminListServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.AdminListServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.AdminListServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminListServlet</servlet-name>
@@ -38,7 +38,7 @@
     <description></description>
     <display-name>AdminAddServlet</display-name>
     <servlet-name>AdminAddServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.AdminAddServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.AdminAddServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminAddServlet</servlet-name>
@@ -48,7 +48,7 @@
     <description></description>
     <display-name>AdminDeleteServlet</display-name>
     <servlet-name>AdminDeleteServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.AdminDeleteServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.AdminDeleteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminDeleteServlet</servlet-name>
@@ -58,7 +58,7 @@
     <description></description>
     <display-name>AdminMutilDeleteServlet</display-name>
     <servlet-name>AdminMutilDeleteServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.AdminMutilDeleteServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.AdminMutilDeleteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminMutilDeleteServlet</servlet-name>
@@ -68,7 +68,7 @@
     <description></description>
     <display-name>AdminPreparedUpdateServlet</display-name>
     <servlet-name>AdminPreparedUpdateServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.AdminPreparedUpdateServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.AdminPreparedUpdateServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminPreparedUpdateServlet</servlet-name>
@@ -78,7 +78,7 @@
     <description></description>
     <display-name>AdminUpdateServlet</display-name>
     <servlet-name>AdminUpdateServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.AdminUpdateServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.AdminUpdateServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminUpdateServlet</servlet-name>
@@ -88,7 +88,7 @@
     <description></description>
     <display-name>FoodCategoryListServlet</display-name>
     <servlet-name>FoodCategoryListServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.FoodCategoryListServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.FoodCategoryListServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodCategoryListServlet</servlet-name>
@@ -98,7 +98,7 @@
     <description></description>
     <display-name>FoodCategoryAddServlet</display-name>
     <servlet-name>FoodCategoryAddServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.FoodCategoryAddServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.FoodCategoryAddServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodCategoryAddServlet</servlet-name>
@@ -108,7 +108,7 @@
     <description></description>
     <display-name>FoodCategoryDeleteServlet</display-name>
     <servlet-name>FoodCategoryDeleteServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.FoodCategoryDeleteServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.FoodCategoryDeleteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodCategoryDeleteServlet</servlet-name>
@@ -118,7 +118,7 @@
     <description></description>
     <display-name>FoodCategoryMultiDeleteServlet</display-name>
     <servlet-name>FoodCategoryMultiDeleteServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.FoodCategoryMultiDeleteServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.FoodCategoryMultiDeleteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodCategoryMultiDeleteServlet</servlet-name>
@@ -128,7 +128,7 @@
     <description></description>
     <display-name>FoodCategoryPreparedUpdateServlet</display-name>
     <servlet-name>FoodCategoryPreparedUpdateServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.FoodCategoryPreparedUpdateServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.FoodCategoryPreparedUpdateServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodCategoryPreparedUpdateServlet</servlet-name>
@@ -138,7 +138,7 @@
     <description></description>
     <display-name>FoodCategoryUpdateServlet</display-name>
     <servlet-name>FoodCategoryUpdateServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.FoodCategoryUpdateServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.FoodCategoryUpdateServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodCategoryUpdateServlet</servlet-name>
@@ -148,7 +148,7 @@
     <description></description>
     <display-name>FoodListServlet</display-name>
     <servlet-name>FoodListServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.FoodListServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.FoodListServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodListServlet</servlet-name>
@@ -158,7 +158,7 @@
     <description></description>
     <display-name>FoodAddServlet</display-name>
     <servlet-name>FoodAddServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.FoodAddServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.FoodAddServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodAddServlet</servlet-name>
@@ -168,7 +168,7 @@
     <description></description>
     <display-name>FoodPreparedAddServlet</display-name>
     <servlet-name>FoodPreparedAddServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.FoodPreparedAddServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.FoodPreparedAddServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodPreparedAddServlet</servlet-name>
@@ -178,7 +178,7 @@
     <description></description>
     <display-name>FoodDeleteServlet</display-name>
     <servlet-name>FoodDeleteServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.FoodDeleteServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.FoodDeleteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodDeleteServlet</servlet-name>
@@ -188,7 +188,7 @@
     <description></description>
     <display-name>FoodMultiDeleteServlet</display-name>
     <servlet-name>FoodMultiDeleteServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.FoodMultiDeleteServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.FoodMultiDeleteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodMultiDeleteServlet</servlet-name>
@@ -198,7 +198,7 @@
     <description></description>
     <display-name>FoodPreparedEditServlet</display-name>
     <servlet-name>FoodPreparedEditServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.FoodPreparedEditServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.FoodPreparedEditServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodPreparedEditServlet</servlet-name>
@@ -208,7 +208,7 @@
     <description></description>
     <display-name>FoodEditServlet</display-name>
     <servlet-name>FoodEditServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.FoodEditServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.FoodEditServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodEditServlet</servlet-name>
@@ -218,7 +218,7 @@
     <description></description>
     <display-name>FoodSearchServlet</display-name>
     <servlet-name>FoodSearchServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.FoodSearchServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.FoodSearchServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodSearchServlet</servlet-name>
@@ -228,7 +228,7 @@
     <description></description>
     <display-name>WXFoodListServlet</display-name>
     <servlet-name>WXFoodListServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.WXFoodListServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.WXFoodListServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>WXFoodListServlet</servlet-name>
@@ -238,7 +238,7 @@
     <description></description>
     <display-name>WXOrderAddServlet</display-name>
     <servlet-name>WXOrderAddServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.WXOrderAddServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.WXOrderAddServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>WXOrderAddServlet</servlet-name>
@@ -248,7 +248,7 @@
     <description></description>
     <display-name>AdminNameCheckServlet</display-name>
     <servlet-name>AdminNameCheckServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.AdminNameCheckServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.AdminNameCheckServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminNameCheckServlet</servlet-name>
@@ -258,10 +258,30 @@
     <description></description>
     <display-name>FoodSearchWordServlet</display-name>
     <servlet-name>FoodSearchWordServlet</servlet-name>
-    <servlet-class>com.lihaogn.web.FoodSearchWordServlet</servlet-class>
+    <servlet-class>com.lihaogn.web.servlet.FoodSearchWordServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodSearchWordServlet</servlet-name>
     <url-pattern>/foodSearchWord</url-pattern>
   </servlet-mapping>
+  
+  
+  <filter>
+    <display-name>EncodingFilter</display-name>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>com.lihaogn.web.filter.EncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <display-name>AutoLoginFilter</display-name>
+    <filter-name>AutoLoginFilter</filter-name>
+    <filter-class>com.lihaogn.web.filter.AutoLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AutoLoginFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>

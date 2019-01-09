@@ -29,7 +29,7 @@
           <li class="layui-nav-item">
             <a href="javascript:;">${admin.adminName }</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a href="./login.html">退出</a></dd>
+              <dd><a href="./login.jsp">退出</a></dd>
             </dl>
           </li>
         </ul>

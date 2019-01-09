@@ -1,4 +1,4 @@
-package com.lihaogn.web;
+package com.lihaogn.web.servlet;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,16 +27,18 @@ import com.lihaogn.domain.Food;
 import com.lihaogn.service.FoodService;
 
 /**
- * Servlet implementation class FoodAddServlet
+ * Servlet implementation class FoodEditServlet
  */
-public class FoodAddServlet extends HttpServlet {
+public class FoodEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		Food food = new Food();
 		// 收集数据的容器
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -74,39 +75,33 @@ public class FoodAddServlet extends HttpServlet {
 					map.put("fimage", "images/food_menu/"+fileName);
 				}
 			}
-			
 		} catch (FileUploadException e1) {
 			e1.printStackTrace();
 		}
 		
-		
 		try {
 			BeanUtils.populate(food, map);
 		} catch (IllegalAccessException | InvocationTargetException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// 设置id
-		food.setPk_fid(UUID.randomUUID().toString());
-		// 设置修改时间
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String createDate = dateFormat.format(new Date());
-		food.setFmodified_date(createDate);
-		food.setFcreat_date(createDate);
-		
 //		System.out.println(food);
-		
-		FoodService service = new FoodService();
-		service.addFood(food);
-		
-		response.sendRedirect(request.getContextPath()+"/foodList");
-		
+		// 3 手动设置没有的数据
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String modifiedDate = dateFormat.format(new Date());
+		food.setFmodified_date(modifiedDate);
+		// 4 service层
+		FoodService foodService = new FoodService();
+		foodService.editFood(food);
+		// 5 跳转页面
+		response.sendRedirect(request.getContextPath() + "/foodList");
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

@@ -1,21 +1,17 @@
-package com.lihaogn.web;
+package com.lihaogn.web.servlet;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lihaogn.domain.FoodCategory;
-import com.lihaogn.domain.FoodType;
 import com.lihaogn.service.FoodService;
 
 /**
- * Servlet implementation class FoodPreparedAddServlet
+ * Servlet implementation class FoodDeleteServlet
  */
-public class FoodPreparedAddServlet extends HttpServlet {
+public class FoodDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -23,14 +19,10 @@ public class FoodPreparedAddServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String fcId = request.getParameter("fcId");
 		FoodService foodService = new FoodService();
-		List<FoodCategory> listFoodCategory = foodService.getAllFoodCategory();
-		List<FoodType> listFoodType = foodService.getAllFoodType();
-		
-		request.setAttribute("foodCategories", listFoodCategory);
-		request.setAttribute("foodTypes", listFoodType);
-		
-		request.getRequestDispatcher("/food_add.jsp").forward(request, response);
+		foodService.deleteFoodById(fcId);
+		response.sendRedirect(request.getContextPath()+"/foodList");
 	}
 
 	/**

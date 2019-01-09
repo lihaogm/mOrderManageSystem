@@ -1,4 +1,4 @@
-package com.lihaogn.web;
+package com.lihaogn.web.servlet;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -40,13 +40,13 @@ public class AdminUpdateServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		// 3 手动设置没有的数据
+		// 3 手动设置没有的数�?
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String adminDate = dateFormat.format(new Date());
 		admin.setCreate_time(adminDate);
 		
 //		System.out.println(admin);
-		// 4 service层
+		// 4 service�?
 		AdminService service = new AdminService();
 		service.updateAdmin(admin);
 		// 5 跳转页面

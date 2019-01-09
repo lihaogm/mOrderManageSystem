@@ -1,4 +1,4 @@
-package com.lihaogn.web;
+package com.lihaogn.web.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,12 +6,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lihaogn.service.FoodService;
+import com.lihaogn.service.AdminService;
 
 /**
- * Servlet implementation class FoodDeleteServlet
+ * Servlet implementation class AdminMutilDeleteServlet
  */
-public class FoodDeleteServlet extends HttpServlet {
+public class AdminMutilDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -19,10 +19,14 @@ public class FoodDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String fcId = request.getParameter("fcId");
-		FoodService foodService = new FoodService();
-		foodService.deleteFoodById(fcId);
-		response.sendRedirect(request.getContextPath()+"/foodList");
+		String aids = request.getParameter("aids");
+		
+//		String[] split = aids.split(")");
+		
+		AdminService service = new AdminService();
+		service.deleteMutilAdminByAid(aids);
+		
+		response.sendRedirect(request.getContextPath()+"/adminList");
 	}
 
 	/**

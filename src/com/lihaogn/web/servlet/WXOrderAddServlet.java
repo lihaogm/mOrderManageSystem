@@ -1,4 +1,4 @@
-package com.lihaogn.web;
+package com.lihaogn.web.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,28 +6,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lihaogn.service.AdminService;
+import com.google.gson.Gson;
+import com.lihaogn.domain.OrderInfoWX;
 
 /**
- * Servlet implementation class AdminNameCheckServlet
+ * Servlet implementation class WXOrderAddServlet
  */
-public class AdminNameCheckServlet extends HttpServlet {
+public class WXOrderAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private OrderInfoWX orderInfoX;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String orderId=request.getParameter("orderId");
+		String userName = request.getParameter("userName");
+		String orderTotalPrice = request.getParameter("orderTotalPrice");
+		System.out.println("orderId: "+orderId+"\r\n"+"userName: "+userName+"\r\n"+"orderTotalPrice: "+orderTotalPrice);
 		
-		// 获得要校验的用户名
-		String adminName = request.getParameter("adminName");
-		System.out.println("adminname: "+adminName);
-		
-		AdminService adminService = new AdminService();
-		boolean isExist=adminService.checkAdminName(adminName);
-		
-		response.getWriter().write("{\"isExist\":"+isExist+"}");
-		
+//		Gson gson=new Gson();
+//		OrderInfoWX orderInfoX = gson.fromJson(orderInfo, OrderInfoWX.class);
+//		System.out.println(orderInfoX);
 	}
 
 	/**

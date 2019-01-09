@@ -1,4 +1,4 @@
-package com.lihaogn.web;
+package com.lihaogn.web.servlet;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
