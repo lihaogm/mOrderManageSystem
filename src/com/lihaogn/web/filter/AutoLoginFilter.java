@@ -1,6 +1,7 @@
 package com.lihaogn.web.filter;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.sql.SQLException;
 
 import javax.servlet.Filter;
@@ -63,7 +64,7 @@ public class AutoLoginFilter implements Filter {
 					if ("cookieAdminName".equals(cookie.getName())) {
 						cookieAdminName = cookie.getValue();
 						// 恢复中文用户名
-//						cookie_username = URLDecoder.decode(cookie_username, "UTF-8");
+						cookieAdminName = URLDecoder.decode(cookieAdminName, "UTF-8");
 					}
 					if ("cookiePassword".equals(cookie.getName())) {
 						cookiePassword = cookie.getValue();

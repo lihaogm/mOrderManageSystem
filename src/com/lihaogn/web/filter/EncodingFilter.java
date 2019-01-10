@@ -2,6 +2,7 @@ package com.lihaogn.web.filter;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -81,6 +82,9 @@ class EnhanceRequest extends HttpServletRequestWrapper{
 			if (parameter!=null && "GET".equals(request.getMethod())) {
 				parameter = new String(parameter.getBytes("iso8859-1"),"UTF-8");
 			}
+//			if(parameter!=null && "POST".equals(request.getMethod())) {
+//				parameter=URLEncoder.encode(parameter, "UTF-8");
+//			}
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

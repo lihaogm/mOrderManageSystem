@@ -1,6 +1,7 @@
 package com.lihaogn.web.servlet;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -52,7 +53,10 @@ public class AdminLoginServlet extends HttpServlet {
 			// 判断用户是否选择自动登录
 			String autoLoginFlag = request.getParameter("checkbox_autoLogin");
 			if (autoLoginFlag!=null) {
-				Cookie cookieAdminName = new Cookie("cookieAdminName",adminName);
+				// 对中文进行编码
+				String adminNameCode = URLEncoder.encode(adminName, "UTF-8");
+				
+				Cookie cookieAdminName = new Cookie("cookieAdminName",adminNameCode);
 				Cookie cookiePassword = new Cookie("cookiePassword",adminPassword);
 				//设置cookie的持久化时间
 				cookieAdminName.setMaxAge(60*60*24);

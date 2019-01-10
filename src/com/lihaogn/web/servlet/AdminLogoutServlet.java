@@ -21,7 +21,7 @@ public class AdminLogoutServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		// 从session中删除admin
 		session.removeAttribute("admin");
-		response.sendRedirect(request.getContextPath()+"/admin_login.jsp");
+		response.sendRedirect(request.getContextPath()+"/login.jsp");
 	}
 
 	/**
