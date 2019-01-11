@@ -23,6 +23,7 @@ public class FoodCategoryListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		FoodService service=new FoodService();
+		
 		List<FoodCategory> listFoodCategory=service.getAllFoodCategory();
 //		for (FoodCategory foodCategory : listFoodCategory) {
 //			System.out.println(foodCategory);

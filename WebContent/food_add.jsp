@@ -17,7 +17,52 @@
 	<script type="text/javascript" src="./lib/layui/layui.js"
 		charset="utf-8"></script>
 	<script type="text/javascript" src="./js/xadmin.js"></script>
-
+	<script type="text/javascript">
+		$(function(){
+			// 异步加载菜品种类数据
+			$.post(
+				"${pageContext.request.contextPath}/foodCategoryListAjax",
+				function(data){
+					var content = "<option value=''>菜品种类</option>";
+					// console.log(data)
+					for(var i=0;i<data.length;i++){
+						// console.log(data[i]);
+						content+="<option value='"+data[i].pk_fcwc_id+"'>"+data[i].fcwc_name+"</option>"
+						// console.log(content);
+					}
+					$("#select_category").html(content);
+					layui.use('form',function(){
+						var form=layui.form;
+						form.render("select");
+					})
+				},
+				"json"
+			);
+			
+			$.post(
+					"${pageContext.request.contextPath}/foodTypeListAjax",
+					function(data){
+						var content = "<option value=''>荤/素</option>";
+						// console.log(data)
+						for(var i=0;i<data.length;i++){
+							// console.log(data[i]);
+							content+="<option value='"+data[i].pk_ftc_id+"'>"+data[i].ftc_name+"</option>"
+							// console.log(content);
+						}
+						$("#select_type").html(content);
+						layui.use('form',function(){
+							var form=layui.form;
+							form.render("select");
+						})
+					},
+					"json"
+				);
+	
+			$("#select_category option[value='${condition.foodCookCategory}']").prop("selected",true);
+			$("#select_type option[value='${condition.foodTypeCategory}']").prop("selected",true);
+		})
+	
+	</script>
 </head>
 
 <body>
@@ -87,22 +132,22 @@
 			<div class="layui-form-item">
 			    <label class="layui-form-label">选择菜品类别</label>
 			    <div class="layui-input-inline">
-			      <select name="fcwc_id" lay-verify="required" >
-			        <option value="">菜品种类</option>
+			      <select id="select_category" name="fcwc_id" lay-verify="required" >
+			        <!-- <option value="">菜品种类</option>
 			        <c:forEach items="${foodCategories }" var="fc">
 		         		<option value="${fc.pk_fcwc_id }">${fc.fcwc_name }</option>
-		         	</c:forEach>
+		         	</c:forEach> -->
 			      </select>
 			    </div>
 			    <div class="layui-form-mid layui-word-aux">
 					<span class="x-red">*</span>
 				</div>
 			    <div class="layui-input-inline">
-			      <select name="ftc_id" lay-verfiy="required">
-	         		<option value="">荤/素</option>
+			      <select id="select_type" name="ftc_id" lay-verfiy="required">
+	         		<!-- <option value="">荤/素</option>
 		         	<c:forEach items="${foodTypes }" var="ft">
 			         	<option value="${ft.pk_ftc_id }">${ft.ftc_name }</option>
-		         	</c:forEach>
+		         	</c:forEach> -->
 	       		  </select>
 			    </div>
 			    <div class="layui-form-mid layui-word-aux">

@@ -15,8 +15,7 @@
   <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
   <script type="text/javascript" src="./js/xadmin.js"></script>
-</head>
-<script>
+  <script type="text/javascript">
 	function refresh(){
 		setTimeout(function(){
 			location.replace(location.href);
@@ -24,6 +23,45 @@
 	}
 	
 	$(function(){
+		// 异步加载菜品种类数据
+		$.post(
+			"${pageContext.request.contextPath}/foodCategoryListAjax",
+			function(data){
+				var content = "<option value=''>菜品种类</option>";
+				// console.log(data)
+				for(var i=0;i<data.length;i++){
+					// console.log(data[i]);
+					content+="<option value='"+data[i].pk_fcwc_id+"'>"+data[i].fcwc_name+"</option>"
+					// console.log(content);
+				}
+				$("#foodCookCategory").html(content);
+				layui.use('form',function(){
+					var form=layui.form;
+					form.render("select");
+				})
+			},
+			"json"
+		);
+		
+		$.post(
+				"${pageContext.request.contextPath}/foodTypeListAjax",
+				function(data){
+					var content = "<option value=''>荤/素</option>";
+					// console.log(data)
+					for(var i=0;i<data.length;i++){
+						// console.log(data[i]);
+						content+="<option value='"+data[i].pk_ftc_id+"'>"+data[i].ftc_name+"</option>"
+						// console.log(content);
+					}
+					$("#foodTypeCategory").html(content);
+					layui.use('form',function(){
+						var form=layui.form;
+						form.render("select");
+					})
+				},
+				"json"
+			);
+
 		$("#foodCookCategory option[value='${condition.foodCookCategory}']").prop("selected",true);
 		$("#foodTypeCategory option[value='${condition.foodTypeCategory}']").prop("selected",true);
 	})
@@ -46,7 +84,7 @@
 		// 2 根据输入框的内容去数据库中模糊查询---List<Food>
 		var content = "";
 		$.post(
-			"${pageContext.request.contextPath}/foodSearchWord",
+			"${pageContext.request.contextPath}/foodCategoryListAjax",
 			{"word":word},
 			function(data){
 				//3、将返回的商品的名称 现在showDiv中
@@ -62,7 +100,7 @@
 		);
 	}
 </script>
-
+</head>
 
 <body>
   <div class="x-nav">
@@ -78,10 +116,10 @@
         	<!-- 选择菜品种类 -->
 	        <div class="layui-inline">
 	       		<select id="foodCookCategory" name="foodCookCategory" lay-verfiy="required" >
-		         	<option value="">菜品种类</option>
-		         	<c:forEach items="${foodCategories }" var="fc">
+		         	<!-- <option value="">菜品种类</option> -->
+		         	<!-- <c:forEach items="${foodCategories }" var="fc">
 		         		<option value="${fc.pk_fcwc_id }">${fc.fcwc_name }</option>
-		         	</c:forEach>
+		         	</c:forEach> -->
 	       		</select> 
            </div>
            <!-- 选择荤素种类 -->
@@ -105,7 +143,7 @@
     </div>
     <xblock>
       <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-      <button class="layui-btn" onclick="x_admin_show('添加菜品','${pageContext.request.contextPath}/foodPreparedAdd')"><i class="layui-icon"></i>添加</button>
+      <button class="layui-btn" onclick="x_admin_show('添加菜品','food_add.jsp')"><i class="layui-icon"></i>添加</button>
       <span class="x-right" style="line-height:40px">共有数据：${pageBean.totalCount } 条</span>
     </xblock>
     <table class="layui-table" id="dataTable">

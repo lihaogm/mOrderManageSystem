@@ -264,8 +264,6 @@
     <servlet-name>FoodSearchWordServlet</servlet-name>
     <url-pattern>/foodSearchWord</url-pattern>
   </servlet-mapping>
-  
-  
   <filter>
     <display-name>EncodingFilter</display-name>
     <filter-name>EncodingFilter</filter-name>
@@ -284,4 +282,24 @@
     <filter-name>AutoLoginFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FoodCategoryListAjaxServlet</display-name>
+    <servlet-name>FoodCategoryListAjaxServlet</servlet-name>
+    <servlet-class>com.lihaogn.web.servlet.FoodCategoryListAjaxServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FoodCategoryListAjaxServlet</servlet-name>
+    <url-pattern>/foodCategoryListAjax</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FoodTypeListAjaxServlet</display-name>
+    <servlet-name>FoodTypeListAjaxServlet</servlet-name>
+    <servlet-class>com.lihaogn.web.servlet.FoodTypeListAjaxServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FoodTypeListAjaxServlet</servlet-name>
+    <url-pattern>/foodTypeListAjax</url-pattern>
+  </servlet-mapping>
 </web-app>

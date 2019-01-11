@@ -38,11 +38,11 @@ public class FoodListServlet extends HttpServlet {
 //		request.setAttribute("foods", listPageBean);
 		
 		// 获得所有菜品种类
-		List<FoodCategory> listFoodCategory=service.getAllFoodCategory();
-		request.setAttribute("foodCategories", listFoodCategory);
-		// 获得荤素种类
-		List<FoodType> listFoodType=service.getAllFoodType();
-		request.setAttribute("foodTypes", listFoodType);
+//		List<FoodCategory> listFoodCategory=service.getAllFoodCategory();
+//		request.setAttribute("foodCategories", listFoodCategory);
+//		// 获得荤素种类
+//		List<FoodType> listFoodType=service.getAllFoodType();
+//		request.setAttribute("foodTypes", listFoodType);
 		
 //		// 获取菜品总数
 ////		long foodAllCount=service.getFoodAllCount();
