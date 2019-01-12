@@ -22,7 +22,7 @@
 
 <body>
 	<div class="x-body">
-		<form class="layui-form" action="${pageContext.request.contextPath}/foodCategoryAdd" method="post">
+		<form class="layui-form" action="${pageContext.request.contextPath}/food?method=addFoodCategory" method="post">
 			<div class="layui-form-item">
 				<label for="category_name" class="layui-form-label"> 
 					<span class="x-red">*</span>类名

@@ -29,7 +29,7 @@
           <li class="layui-nav-item">
             <a href="javascript:;">${admin.adminName }</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a href="${pageContext.request.contextPath }/adminLogout">退出</a></dd>
+              <dd><a href="${pageContext.request.contextPath }/admin?method=logout">退出</a></dd>
             </dl>
           </li>
         </ul>
@@ -89,13 +89,13 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="${pageContext.request.contextPath }/foodList">
+                        <a _href="${pageContext.request.contextPath }/food?method=getFoodList">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>菜品列表</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="${pageContext.request.contextPath }/foodCategoryList">
+                        <a _href="${pageContext.request.contextPath }/food?method=getFoodCategory">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>菜品分类</cite>
                         </a>
@@ -111,7 +111,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="${pageContext.request.contextPath }/adminList">
+                        <a _href="${pageContext.request.contextPath }/admin?method=getAdmin">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>管理员列表</cite>
                         </a>

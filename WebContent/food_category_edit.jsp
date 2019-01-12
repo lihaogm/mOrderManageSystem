@@ -28,7 +28,7 @@
 
 <body>
 	<div class="x-body">
-		<form class="layui-form" action="${pageContext.request.contextPath}/foodCategoryUpdate" method="post">
+		<form class="layui-form" action="${pageContext.request.contextPath}/food?method=editFoodCategory" method="post">
 			<input type="hidden" name="fcid" value="${fcid }">
 			<div class="layui-form-item">
 				<label for="category_name" class="layui-form-label"> 

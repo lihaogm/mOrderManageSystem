@@ -54,7 +54,7 @@
 					<td>${category.fcwc_create_time }</td>
 					<td>${category.fcwc_modified_time}</td>
 		            <td class="td-manage">
-						<a title="编辑" onclick="x_admin_show('编辑','${pageContext.request.contextPath}/foodCategoryPreparedUpdate?fcid=${category.pk_fcwc_id }')" href="javascript:;"> 
+						<a title="编辑" onclick="x_admin_show('编辑','${pageContext.request.contextPath}/food?method=editFoodCategoryPrepared&fcid=${category.pk_fcwc_id }')" href="javascript:;"> 
 							<i class="layui-icon">&#xe642;</i>
 						</a> 
 						<a title="删除" onclick="deleteFoodCategory('${category.pk_fcwc_id}')" href="javascript:;"> 
@@ -84,7 +84,7 @@
 		function deleteFoodCategory(fc_id){
 			var isDel=confirm("确认要删除吗？");
 			if(isDel){
-				location.href="${pageContext.request.contextPath}/foodCategoryDelete?fc_id="+fc_id;
+				location.href="${pageContext.request.contextPath}/food?method=deleteFoodCategory&fc_id="+fc_id;
 			}		
 		}
 		/* 删除选中的admin */
@@ -94,7 +94,7 @@
 				var fcids=$("div.layui-form-checked + i.mi").text();
 				/* alert(aids); */
 				
-				location.href="${pageContext.request.contextPath}/foodCategoryMultiDelete?fcids="+fcids;
+				location.href="${pageContext.request.contextPath}/food?method=deleteMultiFoodCategory&fcids="+fcids;
 			}
 		}
     </script>

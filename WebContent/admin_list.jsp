@@ -66,7 +66,7 @@
 		            </c:if>
 					<td>${admin.create_time}</td>
 		            <td class="td-manage">
-						<a title="编辑" onclick="x_admin_show('编辑','${pageContext.request.contextPath }/adminPreparedUpdate?aid=${admin.aid }')" href="javascript:;"> 
+						<a title="编辑" onclick="x_admin_show('编辑','${pageContext.request.contextPath }/admin?method=editAdminPrepared&aid=${admin.aid }')" href="javascript:;"> 
 							<i class="layui-icon">&#xe642;</i>
 						</a> 
 						<a title="删除" onclick="deleteAdmin('${admin.aid}')" href="javascript:;"> 
@@ -96,7 +96,7 @@
 		function deleteAdmin(aid){
 			var isDel=confirm("确认要删除吗？");
 			if(isDel){
-				location.href="${pageContext.request.contextPath}/adminDelete?aid="+aid;
+				location.href="${pageContext.request.contextPath}/admin?method=deleteAdmin&aid="+aid;
 			}		
 		}
 		/* 删除选中的admin */
@@ -106,7 +106,7 @@
 				var aids=$("div.layui-form-checked + i.mi").text();
 				/* alert(aids); */
 				
-				location.href="${pageContext.request.contextPath}/adminMultiDelete?aids="+aids;
+				location.href="${pageContext.request.contextPath}/admin?method=deleteMultiAdmin&aids="+aids;
 			}
 		}
     </script>

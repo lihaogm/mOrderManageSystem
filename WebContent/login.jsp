@@ -24,7 +24,7 @@
         <div class="message">管理员登录</div>
         <div id="darkbannerwrap"></div>
         
-        <form method="post" class="layui-form" action="${pageContext.request.contextPath }/adminLogin" >
+        <form method="post" class="layui-form" action="${pageContext.request.contextPath }/admin?method=login" >
             <input name="admin_name" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" 
             	onfocus="hideError()">
             <hr class="hr15">

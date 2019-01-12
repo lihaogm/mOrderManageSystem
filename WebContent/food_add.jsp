@@ -21,7 +21,7 @@
 		$(function(){
 			// 异步加载菜品种类数据
 			$.post(
-				"${pageContext.request.contextPath}/foodCategoryListAjax",
+				"${pageContext.request.contextPath}/food?method=getFoodCategoryByAjax",
 				function(data){
 					var content = "<option value=''>菜品种类</option>";
 					// console.log(data)
@@ -40,7 +40,7 @@
 			);
 			
 			$.post(
-				"${pageContext.request.contextPath}/foodTypeListAjax",
+				"${pageContext.request.contextPath}/food?method=getFoodTypeByAjax",
 				function(data){
 					var content = "<option value=''>荤/素</option>";
 					// console.log(data)
@@ -64,7 +64,7 @@
 
 <body>
 	<div class="x-body">
-		<form class="layui-form" action="${pageContext.request.contextPath }/foodAdd" method="post" enctype="multipart/form-data">
+		<form class="layui-form" action="${pageContext.request.contextPath }/food?method=addFood" method="post" enctype="multipart/form-data">
 			<!-- 填写菜名 -->
 			<div class="layui-form-item">
 				<label for="food_name" class="layui-form-label">菜名

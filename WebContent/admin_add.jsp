@@ -27,7 +27,7 @@
 				//alert(content);
 				// 2 去服务端校验用户名是否存在
 				$.post(
-					"${pageContext.request.contextPath}/checkAdminName",
+					"${pageContext.request.contextPath}/admin?method=checkAdminName",
 					{"adminName":content},
 					function(data){
 						var isExist=data.isExist;
@@ -52,7 +52,7 @@
 
 <body>
 	<div class="x-body">
-		<form class="layui-form" action="${pageContext.request.contextPath }/adminAdd" method="post">
+		<form class="layui-form" action="${pageContext.request.contextPath }/admin?method=addAdmin" method="post">
 			<div class="layui-form-item">
 				<label for="username" class="layui-form-label"> <span
 					class="x-red">*</span>登录名

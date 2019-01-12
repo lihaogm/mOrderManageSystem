@@ -32,7 +32,7 @@
 
 <body>
 	<div class="x-body">
-		<form class="layui-form" action="${pageContext.request.contextPath }/adminUpdate" method="post">
+		<form class="layui-form" action="${pageContext.request.contextPath }/admin?method=editAdmin" method="post">
 			<input type="hidden" name="aid" value="${admin.aid }">
 			<div class="layui-form-item">
 				<label for="username" class="layui-form-label"> <span

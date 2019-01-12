@@ -25,7 +25,7 @@
 	$(function(){
 		// 异步加载菜品种类数据
 		$.post(
-			"${pageContext.request.contextPath}/foodCategoryListAjax",
+			"${pageContext.request.contextPath}/food?method=getFoodCategoryByAjax",
 			function(data){
 				var content = "<option value=''>菜品种类</option>";
 				// console.log(data)
@@ -48,7 +48,7 @@
 		);
 		
 		$.post(
-			"${pageContext.request.contextPath}/foodTypeListAjax",
+			"${pageContext.request.contextPath}/food?method=getFoodTypeByAjax",
 			function(data){
 				var content = "<option value=''>荤/素</option>";
 				// console.log(data)
@@ -89,7 +89,7 @@
 		// 2 根据输入框的内容去数据库中模糊查询---List<Food>
 		var content = "";
 		$.post(
-			"${pageContext.request.contextPath}/foodCategoryListAjax",
+			"${pageContext.request.contextPath}/food?method=searchFoodShowTip",
 			{"word":word},
 			function(data){
 				//3、将返回的商品的名称 现在showDiv中
@@ -117,7 +117,7 @@
   <i id="irefresh" onclick="refresh()"></i>
   <div class="x-body">
     <div class="layui-row">
-      <form class="layui-form layui-col-md12 x-so" action="${pageContext.request.contextPath }/foodSearch" method="post">
+      <form class="layui-form layui-col-md12 x-so" action="${pageContext.request.contextPath }/food?method=searchFood" method="post">
         	<!-- 选择菜品种类 -->
 	        <div class="layui-inline">
 	       		<select id="foodCookCategory" name="foodCookCategory" lay-verfiy="required" >
@@ -199,7 +199,7 @@
 		      </td>
 	          <td>${food.food.fis_onsale==1?"在售":"下架" }</td>
 	          <td class="td-manage">
-	            <a title="编辑"  onclick="x_admin_show('编辑','${pageContext.request.contextPath }/foodPreparedEdit?fid=${food.food.pk_fid }')" href="javascript:;">
+	            <a title="编辑"  onclick="x_admin_show('编辑','${pageContext.request.contextPath }/food?method=editFoodCategoryPrepared&fid=${food.food.pk_fid }')" href="javascript:;">
 	              <i class="layui-icon">&#xe642;</i>
 	            </a>
 	            <a title="删除" onclick="member_del(this,'${food.food.pk_fid}')" href="javascript:;">
@@ -220,7 +220,7 @@
       		<a class="prev" href="javascript:void(0);">&lt;&lt;</a>
       	</c:if>
         <c:if test="${pageBean.currentPage!=1 }">
-      		<a class="prev" href="${pageContext.request.contextPath }/foodList?currentPage=${pageBean.currentPage-1}">&lt;&lt;</a>
+      		<a class="prev" href="${pageContext.request.contextPath }/food?method=getFoodList&currentPage=${pageBean.currentPage-1}">&lt;&lt;</a>
       	</c:if>
 
         
@@ -229,7 +229,7 @@
         		<span class="current">${page }</span>
         	</c:if>
         	<c:if test="${pageBean.currentPage!=page }">
-        		<a href="${pageContext.request.contextPath }/foodList?currentPage=${page}">${page }</a>
+        		<a href="${pageContext.request.contextPath }/food?method=getFoodList&currentPage=${page}">${page }</a>
         	</c:if>
         </c:forEach>
         
@@ -238,7 +238,7 @@
       		<a class="next" href="javascript:void(0);">&gt;&gt;</a>
       	</c:if>
       	<c:if test="${pageBean.currentPage!=pageBean.totalPage }">
-      		<a class="next" href="${pageContext.request.contextPath }/foodList?currentPage=${pageBean.currentPage+1}">&gt;&gt;</a>
+      		<a class="next" href="${pageContext.request.contextPath }/food?method=getFoodList&currentPage=${pageBean.currentPage+1}">&gt;&gt;</a>
       	</c:if>
       	
       </div>
@@ -273,7 +273,7 @@
             //发异步删除数据
             /* $(obj).parents("tr").remove(); */
             /* layer.msg('已删除!',{icon:1,time:1000}); */
-            location.href="${pageContext.request.contextPath}/foodDelete?fcId="+id;
+            location.href="${pageContext.request.contextPath}/food?method=deleteFood&fcId="+id;
         });
     }
 
@@ -286,7 +286,7 @@
           layer.msg('删除成功', {icon: 1});
           $(".layui-form-checked").not('.header').parents('tr').remove(); */
     	  var fcids=$("div.layui-form-checked + i.mi").text();
-		  location.href="${pageContext.request.contextPath}/foodMultiDelete?fcids="+fcids;
+		  location.href="${pageContext.request.contextPath}/food?method=deleteMultiFood&fcids="+fcids;
       });
     }
   </script>
