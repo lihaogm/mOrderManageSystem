@@ -34,12 +34,12 @@ public class FoodPreparedEditServlet extends HttpServlet {
 		PageBeanFood pagefood = foodService.getFoodById(fid);
 		request.setAttribute("food", pagefood);
 		
-		// 获取菜品类别
-		List<FoodCategory> foodCategories = foodService.getAllFoodCategory();
-		request.setAttribute("foodCategories", foodCategories);
-		// 获取荤素类别
-		List<FoodType> foodTypes = foodService.getAllFoodType();
-		request.setAttribute("foodTypes", foodTypes);
+//		// 获取菜品类别
+//		List<FoodCategory> foodCategories = foodService.getAllFoodCategory();
+//		request.setAttribute("foodCategories", foodCategories);
+//		// 获取荤素类别
+//		List<FoodType> foodTypes = foodService.getAllFoodType();
+//		request.setAttribute("foodTypes", foodTypes);
 		
 		request.getRequestDispatcher("/food_edit.jsp").forward(request, response);
 	}

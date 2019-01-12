@@ -40,26 +40,23 @@
 			);
 			
 			$.post(
-					"${pageContext.request.contextPath}/foodTypeListAjax",
-					function(data){
-						var content = "<option value=''>荤/素</option>";
-						// console.log(data)
-						for(var i=0;i<data.length;i++){
-							// console.log(data[i]);
-							content+="<option value='"+data[i].pk_ftc_id+"'>"+data[i].ftc_name+"</option>"
-							// console.log(content);
-						}
-						$("#select_type").html(content);
-						layui.use('form',function(){
-							var form=layui.form;
-							form.render("select");
-						})
-					},
-					"json"
-				);
-	
-			$("#select_category option[value='${condition.foodCookCategory}']").prop("selected",true);
-			$("#select_type option[value='${condition.foodTypeCategory}']").prop("selected",true);
+				"${pageContext.request.contextPath}/foodTypeListAjax",
+				function(data){
+					var content = "<option value=''>荤/素</option>";
+					// console.log(data)
+					for(var i=0;i<data.length;i++){
+						// console.log(data[i]);
+						content+="<option value='"+data[i].pk_ftc_id+"'>"+data[i].ftc_name+"</option>"
+						// console.log(content);
+					}
+					$("#select_type").html(content);
+					layui.use('form',function(){
+						var form=layui.form;
+						form.render("select");
+					})
+				},
+				"json"
+			);
 		})
 	
 	</script>

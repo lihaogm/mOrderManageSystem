@@ -35,6 +35,32 @@
 					// console.log(content);
 				}
 				$("#foodCookCategory").html(content);
+				// 选中菜品
+				$("#foodCookCategory option[value='${condition.foodCookCategory}']").prop("selected",true);
+				// 刷新select
+				layui.use('form',function(){
+					var form=layui.form;
+					form.render("select");
+				})
+				
+			},
+			"json"
+		);
+		
+		$.post(
+			"${pageContext.request.contextPath}/foodTypeListAjax",
+			function(data){
+				var content = "<option value=''>荤/素</option>";
+				// console.log(data)
+				for(var i=0;i<data.length;i++){
+					// console.log(data[i]);
+					content+="<option value='"+data[i].pk_ftc_id+"'>"+data[i].ftc_name+"</option>"
+					// console.log(content);
+				}
+				$("#foodTypeCategory").html(content);
+				// 选中菜品
+				$("#foodTypeCategory option[value='${condition.foodTypeCategory}']").prop("selected",true);
+				// 刷新select
 				layui.use('form',function(){
 					var form=layui.form;
 					form.render("select");
@@ -43,27 +69,6 @@
 			"json"
 		);
 		
-		$.post(
-				"${pageContext.request.contextPath}/foodTypeListAjax",
-				function(data){
-					var content = "<option value=''>荤/素</option>";
-					// console.log(data)
-					for(var i=0;i<data.length;i++){
-						// console.log(data[i]);
-						content+="<option value='"+data[i].pk_ftc_id+"'>"+data[i].ftc_name+"</option>"
-						// console.log(content);
-					}
-					$("#foodTypeCategory").html(content);
-					layui.use('form',function(){
-						var form=layui.form;
-						form.render("select");
-					})
-				},
-				"json"
-			);
-
-		$("#foodCookCategory option[value='${condition.foodCookCategory}']").prop("selected",true);
-		$("#foodTypeCategory option[value='${condition.foodTypeCategory}']").prop("selected",true);
 	})
 
 	function overFn(obj){
