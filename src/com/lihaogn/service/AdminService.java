@@ -32,7 +32,6 @@ public class AdminService {
 		try {
 			allAdmins = dao.getAllAdmin();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return allAdmins;
@@ -48,7 +47,6 @@ public class AdminService {
 		try {
 			dao.addAdmin(admin);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -65,7 +63,6 @@ public class AdminService {
 		try {
 			dao.deleteAdminByAid(aid);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -84,7 +81,6 @@ public class AdminService {
 			try {
 				dao.deleteAdminByAid(aid);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

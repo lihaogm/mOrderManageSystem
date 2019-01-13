@@ -144,7 +144,7 @@ public class FoodServlet extends BaseServlet {
 		FoodService service = new FoodService();
 		service.addFood(food);
 
-		response.sendRedirect(request.getContextPath() + "/foodList");
+		response.sendRedirect(request.getContextPath() + "/food?method=getFoodList");
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class FoodServlet extends BaseServlet {
 		String fcId = request.getParameter("fcId");
 		FoodService foodService = new FoodService();
 		foodService.deleteFoodById(fcId);
-		response.sendRedirect(request.getContextPath() + "/foodList");
+		response.sendRedirect(request.getContextPath() + "/food?method=getFoodList");
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class FoodServlet extends BaseServlet {
 		FoodService foodService = new FoodService();
 		foodService.deleteMutilFoodById(fcIds);
 
-		response.sendRedirect(request.getContextPath() + "/foodList");
+		response.sendRedirect(request.getContextPath() + "/food?method=getFoodList");
 	}
 
 	/**
@@ -192,6 +192,7 @@ public class FoodServlet extends BaseServlet {
 	 */
 	public void editFoodPrepared(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+	
 		// 获取要查询的fid，查询要更改的food信息并回显
 		String fid = request.getParameter("fid");
 
@@ -268,7 +269,7 @@ public class FoodServlet extends BaseServlet {
 		FoodService foodService = new FoodService();
 		foodService.editFood(food);
 		// 5 跳转页面
-		response.sendRedirect(request.getContextPath() + "/foodList");
+		response.sendRedirect(request.getContextPath() + "/food?method=getFoodList");
 	}
 
 	/**
@@ -282,7 +283,7 @@ public class FoodServlet extends BaseServlet {
 	public void searchFood(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
+//		request.setCharacterEncoding("utf-8");
 
 		// 1 收集表单数据
 		Map<String, String[]> properties = request.getParameterMap();
@@ -346,6 +347,7 @@ public class FoodServlet extends BaseServlet {
 	 */
 	public void searchFoodShowTip(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// 获得关键字
 		String word = request.getParameter("word");
 //				System.out.println(word);
@@ -383,7 +385,7 @@ public class FoodServlet extends BaseServlet {
 	public void addFoodCategory(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.setCharacterEncoding("utf-8");
+//		request.setCharacterEncoding("utf-8");
 
 		String foodCategoryName = request.getParameter("category_name");
 		FoodService service = new FoodService();
@@ -399,7 +401,7 @@ public class FoodServlet extends BaseServlet {
 
 		service.addFoodCategory(foodCategory);
 
-		response.sendRedirect(request.getContextPath() + "/foodCategoryList");
+		response.sendRedirect(request.getContextPath() + "/food?method=getFoodCategory");
 	}
 
 	/**
@@ -416,7 +418,7 @@ public class FoodServlet extends BaseServlet {
 		String fcId = request.getParameter("fc_id");
 		FoodService service = new FoodService();
 		service.deleteFoodCategoryById(fcId);
-		response.sendRedirect(request.getContextPath() + "/foodCategoryList");
+		response.sendRedirect(request.getContextPath() + "/food?method=getFoodCategory");
 	}
 
 	/**
@@ -488,7 +490,7 @@ public class FoodServlet extends BaseServlet {
 		String fcIds = request.getParameter("fcids");
 		FoodService service = new FoodService();
 		service.deleteMutilFoodCategoryById(fcIds);
-		response.sendRedirect(request.getContextPath() + "/foodCategoryList");
+		response.sendRedirect(request.getContextPath() + "/food?method=getFoodCategory");
 	}
 
 	
@@ -501,6 +503,7 @@ public class FoodServlet extends BaseServlet {
 	 */
 	public void editFoodCategoryPrepared(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		String fcId = request.getParameter("fcid");
 
 		FoodService service = new FoodService();
@@ -520,7 +523,8 @@ public class FoodServlet extends BaseServlet {
 	 */
 	public void editFoodCategory(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		
+//		request.setCharacterEncoding("utf-8");
 
 		String fcId = request.getParameter("fcid");
 		String categoryName = request.getParameter("category_name");
@@ -536,7 +540,7 @@ public class FoodServlet extends BaseServlet {
 		FoodService service = new FoodService();
 		service.editFoodCategory(foodCategory);
 
-		response.sendRedirect(request.getContextPath() + "/foodCategoryList");
+		response.sendRedirect(request.getContextPath() + "/food?method=getFoodCategory");
 	}
 
 	/**
@@ -549,6 +553,7 @@ public class FoodServlet extends BaseServlet {
 	 */
 	public void getFoodTypeByAjax(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		FoodService foodService = new FoodService();
 
 		// 先从缓存中查询foodCategoryList 如果有直接使用, 没有再从数据库中查询 存到缓存中

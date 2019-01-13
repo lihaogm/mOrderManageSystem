@@ -15,7 +15,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.lihaogn.domain.Admin;
@@ -37,24 +36,25 @@ public class AdminServlet extends BaseServlet {
 	 */
 	public void addAdmin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		
+//		request.setCharacterEncoding("utf-8");
 
 		// 1 获取数据
 		Map<String, String[]> properties = request.getParameterMap();
 		// 2 封装数据
-//		String adminName = request.getParameter("username");
-//		String password = request.getParameter("pass");
-//		String privilege = request.getParameter("admin_privilege");
 		Admin admin = new Admin();
 		try {
 			BeanUtils.populate(admin, properties);
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// test
+		System.out.println("AdminServlet addAdmin admin.name: "+admin.getAdminName());
+		
+		
 		// 3 手动添加必要数据
 		// id
 		admin.setAid(UUID.randomUUID().toString());
@@ -66,7 +66,7 @@ public class AdminServlet extends BaseServlet {
 		AdminService service = new AdminService();
 		service.addAdmin(admin);
 
-		response.sendRedirect(request.getContextPath() + "/adminList");
+		response.sendRedirect(request.getContextPath() + "/admin?method=getAdmin");
 	}
 
 	/**
@@ -79,6 +79,7 @@ public class AdminServlet extends BaseServlet {
 	 */
 	public void checkAdminName(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// 获得要校验的用户名
 		String adminName = request.getParameter("adminName");
 		System.out.println("adminname: " + adminName);
@@ -99,9 +100,15 @@ public class AdminServlet extends BaseServlet {
 	 */
 	public void getAdmin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		AdminService adminService = new AdminService();
 		List<Admin> listAdmin = adminService.getAllAdmin();
-
+		
+		// test
+//		for (Admin admin : listAdmin) {
+//			System.out.println("AdminServlet getAdmin admin.name: "+admin.getAdminName());
+//		}
+		
 		request.setAttribute("allAdmins", listAdmin);
 		request.getRequestDispatcher("/admin_list.jsp").forward(request, response);
 	}
@@ -116,11 +123,12 @@ public class AdminServlet extends BaseServlet {
 	 */
 	public void deleteAdmin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		String aid = request.getParameter("aid");
 
 		AdminService service = new AdminService();
 		service.deleteAdminByAid(aid);
-		response.sendRedirect(request.getContextPath() + "/adminList");
+		response.sendRedirect(request.getContextPath() + "/admin?method=getAdmin");
 	}
 
 	/**
@@ -133,6 +141,7 @@ public class AdminServlet extends BaseServlet {
 	 */
 	public void deleteMultiAdmin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		String aids = request.getParameter("aids");
 
 //		String[] split = aids.split(")");
@@ -140,7 +149,7 @@ public class AdminServlet extends BaseServlet {
 		AdminService service = new AdminService();
 		service.deleteMutilAdminByAid(aids);
 
-		response.sendRedirect(request.getContextPath() + "/adminList");
+		response.sendRedirect(request.getContextPath() + "/admin?method=getAdmin");
 	}
 
 	/**
@@ -153,6 +162,7 @@ public class AdminServlet extends BaseServlet {
 	 */
 	public void editAdminPrepared(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// 获取要查询的aid，查询要更改的admin信息并回显
 		String aid = request.getParameter("aid");
 		AdminService service = new AdminService();
@@ -171,7 +181,8 @@ public class AdminServlet extends BaseServlet {
 	 */
 	public void editAdmin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		
+//		request.setCharacterEncoding("utf-8");
 
 		// 1 获取数据
 		Map<String, String[]> properties = request.getParameterMap();
@@ -194,7 +205,7 @@ public class AdminServlet extends BaseServlet {
 		AdminService service = new AdminService();
 		service.updateAdmin(admin);
 		// 5 跳转页面
-		response.sendRedirect(request.getContextPath() + "/adminList");
+		response.sendRedirect(request.getContextPath() + "/admin?method=getAdmin");
 	}
 
 	// ------------------------------------------------------------------------------
@@ -210,13 +221,17 @@ public class AdminServlet extends BaseServlet {
 	 * @throws IOException
 	 */
 	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		
+//		request.setCharacterEncoding("UTF-8");
 
 		HttpSession session = request.getSession();
 		// 获取管理员名和密码
 		String adminName = request.getParameter("admin_name");
-		System.out.println("login_adminName: " + adminName);
-		System.out.println(request.getMethod());
+		
+		// test
+//		System.out.println("AdminServlet login -> admin.name: " + adminName);
+//		System.out.println("AdminServlet login -> request.method"+request.getMethod());
+		
 		String adminPassword = request.getParameter("admin_password");
 		// 将信息传给service层
 		AdminService service = new AdminService();
@@ -227,8 +242,6 @@ public class AdminServlet extends BaseServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-//		System.out.println("login name: "+admin.getAdminName());
 
 		// 判断管理员是否成功登录
 		if (admin != null) { // 登录成功
@@ -269,6 +282,7 @@ public class AdminServlet extends BaseServlet {
 	 * @throws IOException
 	 */
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// 用户注销
 		HttpSession session = request.getSession();
 		// 从session中删除admin

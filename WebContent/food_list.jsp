@@ -199,7 +199,7 @@
 		      </td>
 	          <td>${food.food.fis_onsale==1?"在售":"下架" }</td>
 	          <td class="td-manage">
-	            <a title="编辑"  onclick="x_admin_show('编辑','${pageContext.request.contextPath }/food?method=editFoodCategoryPrepared&fid=${food.food.pk_fid }')" href="javascript:;">
+	            <a title="编辑"  onclick="x_admin_show('编辑','${pageContext.request.contextPath }/food?method=editFoodPrepared&fid=${food.food.pk_fid }')" href="javascript:;">
 	              <i class="layui-icon">&#xe642;</i>
 	            </a>
 	            <a title="删除" onclick="member_del(this,'${food.food.pk_fid}')" href="javascript:;">
