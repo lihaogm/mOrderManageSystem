@@ -20,15 +20,19 @@ public class WXOrderAddServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String orderId=request.getParameter("orderId");
-		String userName = request.getParameter("userName");
-		String orderTotalPrice = request.getParameter("orderTotalPrice");
-		System.out.println("orderId: "+orderId+"\r\n"+"userName: "+userName+"\r\n"+"orderTotalPrice: "+orderTotalPrice);
 		
 //		Gson gson=new Gson();
 //		OrderInfoWX orderInfoX = gson.fromJson(orderInfo, OrderInfoWX.class);
 //		System.out.println(orderInfoX);
+		
+		// 获取客户信息
+		String customerInfoStr = request.getParameter("customerInfo");
+		// 获取订单信息
+		String orderInfoStr = request.getParameter("orderInfo");
+		// test
+		System.out.println("WXOrderAddServlet -> customerInfo ："+customerInfoStr);
+		System.out.println("------------------------------------------------");
+		System.out.println("WXOrderAddServlet -> orderInfo ："+orderInfoStr);
 	}
 
 	/**

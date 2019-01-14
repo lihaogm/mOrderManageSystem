@@ -126,6 +126,7 @@ public class FoodServlet extends BaseServlet {
 			e1.printStackTrace();
 		}
 
+		// 封装数据
 		try {
 			BeanUtils.populate(food, map);
 		} catch (IllegalAccessException | InvocationTargetException e) {

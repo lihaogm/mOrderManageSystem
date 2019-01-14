@@ -55,13 +55,13 @@
                             
                         </a>
                     </li >
-                    <li>
+                    <!-- <li>
                         <a _href="member-del.html">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>会员删除</cite>
                             
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
             <!-- 订单管理 -->

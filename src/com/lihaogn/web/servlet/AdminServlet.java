@@ -287,6 +287,16 @@ public class AdminServlet extends BaseServlet {
 		HttpSession session = request.getSession();
 		// 从session中删除admin
 		session.removeAttribute("admin");
+		// 从cookie中删除admin
+		Cookie cookieAdminName = new Cookie("cookieAdminName", "");
+		Cookie cookiePassword = new Cookie("cookiePassword", "");
+		// 设置cookie的持久化时间
+		cookieAdminName.setMaxAge(0);
+		cookiePassword.setMaxAge(0);
+		// 发送cookie
+		response.addCookie(cookieAdminName);
+		response.addCookie(cookiePassword);
+		
 		response.sendRedirect(request.getContextPath() + "/login.jsp");
 	}
 

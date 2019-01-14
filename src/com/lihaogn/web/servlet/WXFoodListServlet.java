@@ -25,17 +25,6 @@ public class WXFoodListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		String idString = request.getParameter("id");
-//		System.out.println(idString);
-//		
-//		String food="id:1,name:lisi";
-//		String json=null;
-//		
-//		if ("1".equals(idString)) {
-//			Gson gson = new Gson();
-//			json=gson.toJson(food);
-//		}
-		
 		FoodService foodService = new FoodService();
 		// 获取所有菜品
 		List<Food> allFood = foodService.getAllFood();
