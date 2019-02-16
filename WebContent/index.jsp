@@ -49,7 +49,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="member-list.html">
+                        <a _href="${pageContext.request.contextPath }/user?method=listUser">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>会员列表</cite>
                             
