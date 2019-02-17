@@ -30,9 +30,10 @@ public class WXOrderAddServlet extends HttpServlet {
 		// 获取订单信息
 		String orderInfoStr = request.getParameter("orderInfo");
 		// test
-		System.out.println("WXOrderAddServlet -> customerInfo ："+customerInfoStr);
 		System.out.println("------------------------------------------------");
+		System.out.println("WXOrderAddServlet -> customerInfo ："+customerInfoStr);
 		System.out.println("WXOrderAddServlet -> orderInfo ："+orderInfoStr);
+		System.out.println("------------------------------------------------");
 	}
 
 	/**

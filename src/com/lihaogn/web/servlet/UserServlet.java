@@ -33,5 +33,19 @@ public class UserServlet extends BaseServlet {
 		request.getRequestDispatcher("/member-list.jsp").forward(request, response);
 	}
 	
+	/**
+	 * 用户登录
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void UserLogin(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		
+		
+	}
+	
 
 }
