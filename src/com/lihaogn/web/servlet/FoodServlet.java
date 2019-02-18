@@ -72,7 +72,7 @@ public class FoodServlet extends BaseServlet {
 
 		request.setAttribute("pageBean", pageBean);
 
-		request.getRequestDispatcher("/food_list.jsp").forward(request, response);
+		request.getRequestDispatcher("/pages/food_list.jsp").forward(request, response);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public class FoodServlet extends BaseServlet {
 		PageBeanFood pagefood = foodService.getFoodById(fid);
 		request.setAttribute("food", pagefood);
 
-		request.getRequestDispatcher("/food_edit.jsp").forward(request, response);
+		request.getRequestDispatcher("/pages/food_edit.jsp").forward(request, response);
 	}
 
 	/**
@@ -335,7 +335,7 @@ public class FoodServlet extends BaseServlet {
 
 		request.setAttribute("condition", condition);
 
-		request.getRequestDispatcher("/food_list.jsp").forward(request, response);
+		request.getRequestDispatcher("/pages/food_list.jsp").forward(request, response);
 	}
 
 	/**
@@ -474,7 +474,7 @@ public class FoodServlet extends BaseServlet {
 //			System.out.println(foodCategory);
 //		}
 		request.setAttribute("foodCategories", listFoodCategory);
-		request.getRequestDispatcher("/food_category.jsp").forward(request, response);
+		request.getRequestDispatcher("/pages/food_category.jsp").forward(request, response);
 	}
 
 	/**
@@ -511,7 +511,7 @@ public class FoodServlet extends BaseServlet {
 		String fcName = service.getFoodCategoryByid(fcId);
 		request.setAttribute("fc_name", fcName);
 		request.setAttribute("fcid", fcId);
-		request.getRequestDispatcher("/food_category_edit.jsp").forward(request, response);
+		request.getRequestDispatcher("/pages/food_category_edit.jsp").forward(request, response);
 	}
 	
 	/**

@@ -110,7 +110,7 @@ public class AdminServlet extends BaseServlet {
 //		}
 		
 		request.setAttribute("allAdmins", listAdmin);
-		request.getRequestDispatcher("/admin_list.jsp").forward(request, response);
+		request.getRequestDispatcher("/pages/admin_list.jsp").forward(request, response);
 	}
 
 	/**
@@ -168,7 +168,7 @@ public class AdminServlet extends BaseServlet {
 		AdminService service = new AdminService();
 		Admin admin = service.getAdminByAid(aid);
 		request.setAttribute("admin", admin);
-		request.getRequestDispatcher("/admin_edit.jsp").forward(request, response);
+		request.getRequestDispatcher("/pages/admin_edit.jsp").forward(request, response);
 	}
 
 	/**
@@ -266,7 +266,7 @@ public class AdminServlet extends BaseServlet {
 				response.addCookie(cookiePassword);
 			}
 			// 重定向到首页
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
+			response.sendRedirect(request.getContextPath() + "/pages/index.jsp");
 		} else {
 			request.setAttribute("loginError", "用户名或密码错误！");
 			request.getRequestDispatcher("/login.jsp").forward(request, response);

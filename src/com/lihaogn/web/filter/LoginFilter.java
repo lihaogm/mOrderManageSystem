@@ -45,7 +45,8 @@ public class LoginFilter implements Filter {
 		Admin admin = (Admin) session.getAttribute("admin");
 		// 
 		if (admin==null) {
-			
+			resp.sendRedirect(req.getContextPath()+"/login.jsp");
+			return;
 		}
 		
 		chain.doFilter(request, response);
